@@ -1,0 +1,29 @@
+.banner {
+  height: 400px;
+}
+
+p,
+span {
+  color: #9370db;
+}
+h1,
+h2,
+h3 {
+  color: #e6e6fa;
+}
+.content-area {
+  background-color: #e6e6fa;
+}
+
+.border {
+  border-color: #e6e6fa;
+}
+
+.button:hover {
+  background-color: #e6e6fa;
+}
+
+.banner-text {
+  text-shadow: 3px 3px 6px rgba(10, 10, 10, 0.45),
+    2px 0px 5px rgba(19, 17, 18, 0.54);
+}
