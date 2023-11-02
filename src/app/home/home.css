@@ -27,3 +27,7 @@ h3 {
   text-shadow: 3px 3px 6px rgba(10, 10, 10, 0.45),
     2px 0px 5px rgba(19, 17, 18, 0.54);
 }
+
+.products-container::-webkit-scrollbar{
+display: none;
+}

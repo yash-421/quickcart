@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 import "./home.css";
+import SliderProductList from "../components/sliderProductList";
 
 const bannerImages = [
   "/Images/banner-1.jpg",
@@ -12,6 +13,7 @@ const bannerImages = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+
   const [categories, setCategories] = useState([
     {
       name: "Dairy, Bread & Eggs",
@@ -65,7 +67,56 @@ export default function Home() {
       name: "Dairy, Bread & Eggs",
       image: "/categories/dairyandeggs.avif",
     },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
+    {
+      name: "Dairy, Bread & Eggs",
+      image: "/categories/dairyandeggs.avif",
+    },
   ]);
+
   const nextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % bannerImages.length);
   };
@@ -78,12 +129,10 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-
     return () => {
       clearInterval(interval);
     };
   }, []);
-
   return (
     <main className="p-6">
       <article className="banner relative h-96  ">
@@ -124,11 +173,13 @@ export default function Home() {
         </button>
       </article>
       <article className="all-categories my-5 ">
-        <h6 className="text-2xl ml-6 font-semibold  text-gray-700 ">Products</h6>
+        <h6 className="text-2xl ml-6 font-semibold  text-gray-500 ">
+          Products
+        </h6>
         <div className="categories flex flex-wrap justify-center py-5">
           {categories.map((category, index) => (
             <div
-              className="m-3 p-4 rounded-xl w-40 md:w-60 item flex flex-col items-center justify-around shadow-xl bg-gradient-to-bl text-yellow-50 from-orange-300 to-red-500"
+              className="m-3 p-1 rounded-xl w-40 md:w-60 item flex flex-col items-center justify-around shadow-xl bg-gradient-to-bl text-yellow-50 from-lime-100 via-lime-300 to-green-200"
               key={index}
             >
               <Image
@@ -144,6 +195,8 @@ export default function Home() {
           ))}
         </div>
       </article>
+      <SliderProductList categories={categories} header="Best Products" />
+      <SliderProductList categories={categories} header="Cool Products" />
     </main>
   );
 }
