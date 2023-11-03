@@ -3,5 +3,13 @@
 @tailwind utilities;
 
 body{
-  background-color: #F0F0F0;
+  background-color: #FEFAE0;
 }
+
+input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{
+  display: none;
+}
+
+::-webkit-scrollbar{
+  display: none;
+  }

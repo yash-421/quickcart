@@ -2,7 +2,7 @@
   height: 400px;
 }
 
-p,
+/* p, */
 /* span {
   color: #9370db;
 }
@@ -28,6 +28,6 @@ h3 {
     2px 0px 5px rgba(19, 17, 18, 0.54);
 }
 
-.products-container::-webkit-scrollbar{
-display: none;
+.products-container::-webkit-scrollbar {
+  display: none;
 }
