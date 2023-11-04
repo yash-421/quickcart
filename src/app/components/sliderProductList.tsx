@@ -87,7 +87,7 @@ const SliderProductList = React.memo(
                   <IoIosAdd />
                 </button>
               </div>
-              <button className="add-cart flex p-2 items-center text-white font-semibold mt-2  hover:bg-transparent hover:border-amber-800 border-2 border-transparent hover:text-secondary hover:border-2 rounded-lg m-auto text-center hover:bg-gray-100 bg-secondary">
+              <button className="add-cart flex p-2 items-center text-white font-semibold mt-2  hover:bg-transparent hover:border-primary border-2 border-transparent hover:text-secondary hover:border-2 rounded-lg m-auto text-center hover:bg-gray-100 bg-secondary">
                 <BsCart4 className="mr-1" /> Add to Cart
               </button>
             </div>

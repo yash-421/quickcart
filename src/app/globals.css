@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body{
-  background-color: #FEFAE0;
+  background-color: white;
+  box-sizing: border-box; 
 }
 
 input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{
@@ -12,4 +13,9 @@ input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{
 
 ::-webkit-scrollbar{
   display: none;
+  }
+
+  .MuiMobileStepper-dots{
+    position: absolute !important;
+    bottom: 10% !important;
   }
