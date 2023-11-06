@@ -8,11 +8,19 @@ import {
   CardContent,
   Chip,
   Grid,
+  IconButton,
   MobileStepper,
   Paper,
+  Rating,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import {
+  AiOutlineArrowRight,
+  AiOutlineEye,
+  AiOutlineHeart,
+} from "react-icons/ai";
+import { PiShoppingCart } from "react-icons/pi";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { theme } from "../mui/theme";
 
@@ -43,7 +51,7 @@ const colorClasses = [
   "bg-[#ECFFEC]",
   "bg-[#f2fce4]",
   "bg-[#feefea]",
-  "bg-[##fff3ff]",
+  "bg-[#fff3ff]",
   "bg-[#f2fce4]",
   "bg-[#fff3eb]",
   "bg-[#fff3ff]",
@@ -175,12 +183,10 @@ export default function Home() {
   }, []);
 
   return (
-    <Grid container >
+    <Grid container>
       <Grid item xs={12}>
         <Box className="flex flex-col items-center justify-center p-5 relative ">
-          <Box
-            className="min-w-[100%] min-h-[480px] flex flex-col justify-center  text-center relative "
-          >
+          <Box className="min-w-[100%] min-h-[480px] flex flex-col justify-center  text-center relative ">
             <h6 className=" text-2xl font-extrabold text-center mb-5  ">
               {steps[activeStep].label}
             </h6>
@@ -252,12 +258,16 @@ export default function Home() {
           const colorClass = colorClasses[index % colorClasses.length];
           return (
             <Card
-              className={` ${colorClass}  m-6 w-36 rounded-lg border-border_color1 hover:border-border_color2 hover:border-2 hover:shadow-box_shadow_2`}
+              className={` ${colorClass} hover:text-primary shadow-none text-secondary_text  m-6 w-36 rounded-xl border-border_color1 hover:border-border_color2 hover:border-[1px] hover:shadow-box_shadow_2 card`}
               key={index}
             >
               <CardContent>
-                <img src={category.image} className="object-contain" alt="" />
-                <span className="text-secondary_text">{category.name} </span>
+                <img
+                  src={category.image}
+                  className="object-contain hover:scale-[1.05]"
+                  alt=""
+                />
+                <span className="font-semibold">{category.name} </span>
               </CardContent>
             </Card>
           );
@@ -330,16 +340,73 @@ export default function Home() {
         </div>
       </Grid>
       <Grid item xs={12} className="mt-5 px-5 ">
-        <h2 className="text-3xl m-4 font-semibold">Popular Products</h2>
-        <Grid container spacing={5} >
-          {categories.map((category,index) => {
+        <h2 className="text-3xl my-5 font-semibold">Popular Products</h2>
+        <Grid container spacing={5} className=" justify-center ">
+          {categories.slice(0, 10).map((category, index) => {
             return (
-              <Grid item xs={3} key={index}>
-                <Card>
-                  <CardContent>
-                    <img src={category.image} alt="" />
-                    <p>{category.name}</p>
-                    <span>{category.name}</span>
+              <Grid item xs={2.3} key={index}>
+                <Card className="border-[1px] shadow-none relative card hover:border-primary hover:shadow-box_shadow_3_hover rounded-2xl py-6 card">
+                  <CardContent className="flex flex-col items-start">
+                    <div className="onImgContent flex justify-center w-full relative ">
+                      <img
+                        src={category.image}
+                        className="object-contain h-40 m-auto hover:scale-[1.05] "
+                        alt=""
+                      />
+                      <div className="border-[1px] rounded-md options  top-1/2 border-primary justify-center overflow-hidden flex text-2xl min-w-[84px] w-1/2  items-center bg-white text-primary absolute h-8">
+                        <Tooltip
+                          title="View"
+                          placement="top"
+                          arrow
+                         className=" duration-500"
+
+                        >
+                          <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary ">
+                            <AiOutlineEye className="" />
+                          </IconButton>
+                        </Tooltip>
+                        <hr className="p-[0.5px] bg-primary h-8" />
+                        <Tooltip
+                          title="Wishlist"
+                          placement="top"
+                          arrow
+                         className=" duration-500 "
+                        >
+                          <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary" >
+                            <AiOutlineHeart className="" />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
+                    </div>
+                    <p className="text-xxs text-secondary_text">
+                      {category.name}
+                    </p>
+                    <span className="text-lg font-semibold">
+                      {category.name}
+                    </span>
+                    <Rating
+                      name="simple-controlled"
+                      value={5}
+                      size="small"
+                      className=" mt-3"
+                    />
+                    <span className="text-text mt-2 text-md">
+                      By <span className="text-primary"> Yash Choudhary</span>
+                    </span>
+                    <div className="details mt-2 flex justify-between w-full  items-center">
+                      <div className="price">
+                        <span className="underline text-primary font-semibold">
+                          ₹ 22.50
+                        </span>
+                        <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                      </div>
+                      <button className="bg-background_3 p-2 duration-500 flex items-center text-primary text-md font-semibold active:shadow-none hover:shadow-2xl hover:-translate-y-1 transition rounded-md ">
+                        <PiShoppingCart /> Add
+                      </button>
+                    </div>
+                    <div className="offer bg-blue-300 py-2  px-5 text-center text-white font-semibold left-0 rounded-br-lg absolute top-0">
+                      <span>9%</span>
+                    </div>
                   </CardContent>
                 </Card>
               </Grid>
@@ -347,6 +414,7 @@ export default function Home() {
           })}
         </Grid>
       </Grid>
+
     </Grid>
   );
 }

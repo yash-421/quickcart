@@ -2,20 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   background-color: white;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
-input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
   display: none;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
-  }
+}
 
-  .MuiMobileStepper-dots{
-    position: absolute !important;
-    bottom: 10% !important;
-  }
+.MuiMobileStepper-dots {
+  position: absolute !important;
+  bottom: 10% !important;
+}
+img {
+  transition: transform 0.5s;
+}
+
+.icon {
+  --tw-text-opacity: 1 !important;
+  color: rgb(59 183 126 / var(--tw-text-opacity)) !important;
+}
+
+.MuiTooltip-tooltip {
+  --tw-text-opacity: 1;
+  background-color: rgb(59 183 126 / var(--tw-text-opacity));
+}
+.MuiTooltip-tooltipArrow {
+  --tw-text-opacity: 1;
+  background-color: rgb(59 183 126 / var(--tw-text-opacity));
+}
+.MuiTooltip-arrow {
+  --tw-text-opacity: 1;
+  color: rgb(59 183 126 / var(--tw-text-opacity));
+}
+
+.options{
+  display: none;
+}
+.card:hover .options{
+  display: flex;
+}
