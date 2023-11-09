@@ -1,37 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import {
-  IoIosArrowBack,
-  IoIosArrowForward,
-  IoIosAdd,
-  IoIosRemove,
-} from "react-icons/io";
-import { BsCart4, BsTrash3 } from "react-icons/bs";
-import { BiSolidTrashAlt } from "react-icons/bi";
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineEye,
+  AiOutlineHeart,
+} from "react-icons/ai";
+import {FaLongArrowAltLeft, FaLongArrowAltRight} from 'react-icons/fa'
+import { PiShoppingCart } from "react-icons/pi";
+import { Card, CardContent, Tooltip, IconButton, Rating } from "@mui/material";
+
 const SliderProductList = React.memo(
-  ({
-    categories,
-    header,
-  }: {
-    categories: { name: string; image: string }[];
-    header: string;
-  }) => {
+  ({ categories }: { categories: { name: string; image: string }[] }) => {
     const [scrollLeftButtonVisible, setScrollLeftButtonVisible] =
       useState(false);
     const [scrollRightButtonVisible, setScrollRightButtonVisible] =
       useState(true);
     const containerRef = useRef<HTMLDivElement | null>(null);
-
-    const scrollLeft = () => {
-      if (containerRef.current) {
-        containerRef.current.scrollLeft -= 230; // Adjust the scroll distance as needed
-      }
-    };
-
-    const scrollRight = () => {
-      if (containerRef.current) {
-        containerRef.current.scrollLeft += 230; // Adjust the scroll distance as needed
-      }
-    };
 
     useEffect(() => {
       const handleScroll = () => {
@@ -49,68 +33,107 @@ const SliderProductList = React.memo(
       };
     }, []);
 
+    const scrollLeft = () => {
+      if (containerRef.current) {
+        containerRef.current.scrollLeft -= 240 // Adjust the scroll distance as needed
+      }
+    };
+
+    const scrollRight = () => {
+      if (containerRef.current) {
+        containerRef.current.scrollLeft += 240 // Adjust the scroll distance as needed
+      }
+    };
+
     return (
-      <article className="p-6 relative mx-5">
-        <h6 className="my-5 text-xl font-semibold text-gray-800">{header}</h6>
+      <article className="p-6 relative mx-5 mt-10">
         <div
-          className="flex overflow-auto products-container scroll-smooth"
-          style={{ transition: "transform 0.3s ease" }}
+          className={`flex overflow-auto   scroll-smooth w-full`}
+          style={{
+            transition: "transform 0.3s ease"
+          }}
           ref={containerRef}
         >
           {categories.map((category, index) => (
-            <div
-              className="p-6 bg-primary rounded-lg mx-4 w-44 min-w-max shadow-lg relative"
-              key={index}
-            >
-              <button className="remove absolute top-1 right-1 p-2 font-bold bg-red-600 rounded-lg text-white shadow-lg active:shadow-gray-200 active:shadow-none text-lg">
-                <BiSolidTrashAlt />
-              </button>
-              <img
-                src={category.image}
-                alt=""
-                className="w-32 h-32 object-contain mx-auto mb-4"
-              />
-              <span className="text-center font-bold text-text">
-                {category.name}
-              </span>
-              <div className="cart-details flex justify-center mt-5">
-                <button className="text-2xl text-red-400">
-                  <IoIosRemove />
-                </button>
-                <span
-                  className="mx-2 text-center bg-secondary rounded-full py-2 w-10 border-0"
-                  role="input"
-                >
-                  0
+            <Card className="border-[1px] shadow-none min-w-[230px] mx-5 relative card hover:border-primary hover:shadow-box_shadow_3_hover rounded-2xl py-5 card" key={index} >
+              <CardContent className="flex flex-col items-start">
+                <div className="onImgContent flex justify-center w-full relative ">
+                  <img
+                    src={category.image}
+                    className="object-contain h-40 m-auto hover:scale-[1.05] "
+                    alt=""
+                  />
+                  <div className="border-[1px] rounded-md options  top-1/2 border-primary justify-center overflow-hidden flex text-2xl min-w-[84px] w-1/2  items-center bg-white text-primary absolute h-8">
+                    <Tooltip
+                      title="View"
+                      placement="top"
+                      arrow
+                      className=" duration-500"
+                    >
+                      <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary ">
+                        <AiOutlineEye />
+                      </IconButton>
+                    </Tooltip>
+                    <hr className="p-[0.5px] bg-primary h-8" />
+                    <Tooltip
+                      title="Wishlist"
+                      placement="top"
+                      arrow
+                      className=" duration-500 "
+                    >
+                      <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary">
+                        <AiOutlineHeart />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                </div>
+                <p className="text-xxs text-secondary_text">{category.name}</p>
+                <span className="text-lg font-semibold">{category.name}</span>
+                <div className=" flex items-center justify-between mt-3  rating">
+                <Rating
+                  name="simple-controlled"
+                  value={5}
+                  size="small"
+                />
+                <span className="ml-1 text-gray-400 text-sm" > {5} </span>
+                </div>
+                
+                <span className="text-text mt-2 text-md">
+                  By <span className="text-primary"> Yash Choudhary</span>
                 </span>
-                <button className="text-2xl text-green-500">
-                  <IoIosAdd />
-                </button>
-              </div>
-              <button className="add-cart flex p-2 items-center text-white font-semibold mt-2  hover:bg-transparent hover:border-primary border-2 border-transparent hover:text-secondary hover:border-2 rounded-lg m-auto text-center hover:bg-gray-100 bg-secondary">
-                <BsCart4 className="mr-1" /> Add to Cart
-              </button>
-            </div>
+               
+                  <div className="price mt-2">
+                    <span className="underline text-primary font-semibold">
+                      ₹ 22.50
+                    </span>
+                    <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                  </div>
+                  <button className="bg-primary hover:bg-secondary mt-3 p-2 duration-500 flex items-center w-full justify-center text-white text-md font-semibold transition-colors  rounded-md ">
+                    <PiShoppingCart /> Add to cart
+                  </button>
+               
+                <div className="offer bg-primary py-2  px-5 text-center text-white font-semibold left-0 rounded-br-lg absolute top-0">
+                  <span>9%</span>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
         <button
-          className={`bg-white shadow-lg text-black p-2 rounded-full mt-8 ${
-            !scrollLeftButtonVisible ? "hidden" : ""
-          } absolute top-1/2 -translate-y-1/2 mb-2 -translate-x-1/2 active:shadow-none`}
-          id="scroll-left"
+          className={`bg-slate-50 cursor-pointer hover:bg-primary hover:text-white text-slate-400 transition-colors shadow-lg  p-2 rounded-full mt-8 absolute -top-10 -translate-y-1/2  -translate-x-1/2 active:shadow-none`}
+          disabled={!scrollLeftButtonVisible}
           onClick={scrollLeft}
         >
-          <IoIosArrowBack className="text-xl" />
+          <FaLongArrowAltLeft className="text-xl  font-extrabold " />
+
         </button>
         <button
-          className={`bg-white shadow-lg text-black mb-2 p-2 rounded-full mt-8 ${
-            !scrollRightButtonVisible ? "hidden" : ""
-          } absolute top-1/2 -translate-y-1/2 -translate-x-1/2 -right-3 active:shadow-none`}
-          id="scroll-right"
+          className={`bg-slate-50 cursor-pointer hover:bg-primary  hover:text-white text-slate-400 transition-colors shadow-lg   p-2 rounded-full mt-8 absolute -top-10 left-20 -translate-y-1/2 -translate-x-1/2  active:shadow-none`}
+          disabled={!scrollRightButtonVisible}
           onClick={scrollRight}
         >
-          <IoIosArrowForward className="text-xl" />
+          <FaLongArrowAltRight className="text-xl  font-extrabold " />
         </button>
       </article>
     );

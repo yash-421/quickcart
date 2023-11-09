@@ -33,7 +33,7 @@ const config: Config = {
         background_3: "#def9ec",
         border_color1: "#ececec",
         border_color2: "#bce3c9",
-
+        dark:'#29a56c'
       },
       fontSize: {
         xxs: "12px",

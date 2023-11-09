@@ -19,6 +19,8 @@ input::-webkit-outer-spin-button {
 .MuiMobileStepper-dots {
   position: absolute !important;
   bottom: 10% !important;
+  right: 50%;
+  transform: translateX(-50%);
 }
 img {
   transition: transform 0.5s;
@@ -42,9 +44,37 @@ img {
   color: rgb(59 183 126 / var(--tw-text-opacity));
 }
 
-.options{
+.options {
   display: none;
 }
-.card:hover .options{
+.card:hover .options {
   display: flex;
+}
+
+.banner-img {
+  background-image: url("../../public/banner-4.png");
+  background-position: center;
+  background-size: cover;
+}
+.banner-img10 {
+  background-image: url("../../public/banner-10-min.png");
+  background-position: center;
+  background-size: cover;
+}
+.banner-img9 {
+  background-image: url("../../public/banner-9-min.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.transition {
+  transition: 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.label-line::before {
+  content: " ";
+  height: 2px;
+  background-color: #3bb77d54;
+  width: 124px;
+  position: absolute;
 }

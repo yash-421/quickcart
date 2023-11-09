@@ -1,29 +1,27 @@
 "use client";
-import React, { useState, useEffect, useRef, Suspense } from "react";
 import {
-  Box,
   Button,
   Card,
-  CardActions,
   CardContent,
+  CardMedia,
   Chip,
   Grid,
   IconButton,
-  MobileStepper,
   Paper,
   Rating,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
+import { useState } from "react";
 import {
   AiOutlineArrowRight,
   AiOutlineEye,
-  AiOutlineHeart,
+  AiOutlineHeart
 } from "react-icons/ai";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { PiShoppingCart } from "react-icons/pi";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
-import { theme } from "../mui/theme";
-
+import Carousel from "react-material-ui-carousel";
+import SliderProductList from "../components/sliderProductList";
 const steps = [
   {
     label: "Select campaign settings",
@@ -58,9 +56,6 @@ const colorClasses = [
 ];
 
 export default function Home() {
-  const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = steps.length;
-
   const [categories, setCategories] = useState([
     {
       name: "Dairy, Bread & Eggs",
@@ -164,74 +159,54 @@ export default function Home() {
     },
   ]);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => (prevActiveStep + 1) % maxSteps);
-  };
-
-  const handleBack = () => {
-    setActiveStep(
-      (prevActiveStep) => (prevActiveStep - 1 + maxSteps) % maxSteps
-    );
-  };
-  useEffect(() => {
-    let next = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => {
-      clearInterval(next);
-    };
-  }, []);
-
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <Box className="flex flex-col items-center justify-center p-5 relative ">
-          <Box className="min-w-[100%] min-h-[480px] flex flex-col justify-center  text-center relative ">
-            <h6 className=" text-2xl font-extrabold text-center mb-5  ">
-              {steps[activeStep].label}
-            </h6>
-            <span className=" text-center text-gray-950 font-semibold text-2xl w-2/3 self-center ">
-              {steps[activeStep].description}
-            </span>
-            <img
-              src={steps[activeStep].image}
-              className="h-full w-full rounded-lg absolute opacity-60"
-            />
-          </Box>
-          <MobileStepper
-            variant="dots"
-            steps={maxSteps}
-            position="static"
-            activeStep={activeStep}
-            nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                className="absolute py-1 hover:bg-white hover:shadow-md active:shadow-none rounded-full px-1 min-w-[15px] top-[40%] right-10 bg-white -translate-x-2/4 translate-y-2/4   "
-              >
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowLeft />
-                ) : (
-                  <KeyboardArrowRight />
-                )}
-              </Button>
-            }
-            backButton={
-              <Button
-                size="small"
-                onClick={handleBack}
-                className="absolute py-1 hover:bg-white hover:shadow-md active:shadow-none rounded-full px-1 min-w-[15px] top-[40%] left-16 bg-white -translate-x-2/4 translate-y-2/4"
-              >
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowRight />
-                ) : (
-                  <KeyboardArrowLeft />
-                )}
-              </Button>
-            }
-          />
-        </Box>
+      <Grid item xs={12} className="m-5 ">
+        <Carousel
+          autoPlay
+          animation="slide"
+          duration={500}
+          height={"400px"}
+          indicatorIconButtonProps={{
+            className:
+              "text-primary opacity-10 hover:text-dark hover:opacity-100 mx-1 overflow-hidden ",
+          }}
+          activeIndicatorIconButtonProps={{
+            className: "text-dark opacity-100",
+          }}
+          className=""
+          NextIcon={<IoIosArrowForward />}
+          PrevIcon={<IoIosArrowBack />}
+          stopAutoPlayOnHover
+          navButtonsAlwaysVisible
+          navButtonsProps={{
+            className:'bg-gray-200 group-hover:text-white group-hover:opacity-[1!important] group-hover:bg-primary text-black  '
+          }}
+          navButtonsWrapperProps={{
+            className:'group'
+          }}
+        >
+          {steps.map((item, index) => (
+            <Paper
+              key={index}
+              className="relative h-full bg-center bg-cover transition ease-linear delay-500 overflow-hidden rounded-xl  "
+            >
+              <img
+                src={item.image}
+                alt={`Step ${index + 1}`}
+                className="w-full h-full object-cover "
+              />
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+                <Typography variant="h4" className="text-2xl font-bold mb-2">
+                  {item.label}
+                </Typography>
+                <Typography variant="body1">{item.description}</Typography>
+              </div>
+            </Paper>
+          ))}
+        </Carousel>
       </Grid>
+
       <Grid item xs={4}>
         <h6 className="pl-4 font-semibold text-lg">Featued Items</h6>
       </Grid>
@@ -358,11 +333,10 @@ export default function Home() {
                           title="View"
                           placement="top"
                           arrow
-                         className=" duration-500"
-
+                          className=" duration-500"
                         >
                           <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary ">
-                            <AiOutlineEye className="" />
+                            <AiOutlineEye />
                           </IconButton>
                         </Tooltip>
                         <hr className="p-[0.5px] bg-primary h-8" />
@@ -370,10 +344,10 @@ export default function Home() {
                           title="Wishlist"
                           placement="top"
                           arrow
-                         className=" duration-500 "
+                          className=" duration-500 "
                         >
-                          <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary" >
-                            <AiOutlineHeart className="" />
+                          <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary">
+                            <AiOutlineHeart />
                           </IconButton>
                         </Tooltip>
                       </div>
@@ -404,7 +378,7 @@ export default function Home() {
                         <PiShoppingCart /> Add
                       </button>
                     </div>
-                    <div className="offer bg-blue-300 py-2  px-5 text-center text-white font-semibold left-0 rounded-br-lg absolute top-0">
+                    <div className="offer bg-primary py-2  px-5 text-center text-white font-semibold left-0 rounded-br-lg absolute top-0">
                       <span>9%</span>
                     </div>
                   </CardContent>
@@ -415,6 +389,335 @@ export default function Home() {
         </Grid>
       </Grid>
 
+      <Grid item xs={12} className="my-5 px-5">
+        <h6 className="text-2xl font-bold text-gray-700  mb-5">
+          Daily Best Sells
+        </h6>
+        <Grid container>
+          <Grid
+            item
+            xs={3}
+            className="mt-5 px-5 banner-img min-h-[483px] rounded-xl flex flex-col items-center justify-around py-5 h-[520px] "
+          >
+            <span className="banner-text text-3xl mt-10 px-5 font-semibold leading-snug ">
+              Create a natural oasis within your home
+            </span>
+            <Button
+              variant="contained"
+              className="bg-primary rounded-md self-center text-white items-center justify-center"
+            >
+              Shop now{" "}
+              <AiOutlineArrowRight className="text-xl font-bold align-middle ml-1" />{" "}
+            </Button>
+          </Grid>
+          <Grid item xs={9} className="my-auto px-5  items-center">
+            <SliderProductList categories={categories} />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid item xs={3} className="px-5 font-semibold">
+        <h1 className="text-2xl mb-4">Top Selling</h1>
+        <hr className="label-line mb-5" />
+        {categories.slice(0, 3).map((item, index) => (
+          <Card
+            key={index}
+            className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+          >
+            <CardContent className="flex">
+              <CardMedia
+                component="img"
+                height="100"
+                width="100"
+                image={item.image}
+                alt={item.name}
+                className="h-[100px] w-[100px]"
+              />
+              <div className="details ml-3">
+                <Typography
+                  variant="h6"
+                  component="div"
+                  className="mb-2 text-md"
+                >
+                  {item.name}
+                </Typography>
+                <div className="flex items-center">
+                  <Rating value={5} size="small" readOnly />
+                  <Typography
+                    variant="body2"
+                    component="span"
+                    className="ml-1 text-gray-400"
+                  >
+                    5
+                  </Typography>
+                </div>
+                <div className="price mt-1">
+                  <span className="underline text-primary font-semibold">
+                    ₹ 22.50
+                  </span>
+                  <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </Grid>
+      <Grid item xs={3} className="px-5 font-semibold">
+        <h1 className="text-2xl mb-4">Trending Products</h1>
+        <hr className="label-line mb-5" />
+        {categories.slice(0, 3).map((item, index) => (
+          <Card
+            key={index}
+            className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+          >
+            <CardContent className="flex">
+              <CardMedia
+                component="img"
+                height="100"
+                width="100"
+                image={item.image}
+                alt={item.name}
+                className="h-[100px] w-[100px]"
+              />
+              <div className="details ml-3">
+                <Typography
+                  variant="h6"
+                  component="div"
+                  className="mb-2 text-md"
+                >
+                  {item.name}
+                </Typography>
+                <div className="flex items-center">
+                  <Rating value={5} size="small" readOnly />
+                  <Typography
+                    variant="body2"
+                    component="span"
+                    className="ml-1 text-gray-400"
+                  >
+                    5
+                  </Typography>
+                </div>
+                <div className="price mt-1">
+                  <span className="underline text-primary font-semibold">
+                    ₹ 22.50
+                  </span>
+                  <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </Grid>
+      <Grid item xs={3} className="px-5 font-semibold">
+        <h1 className="text-2xl mb-4">Recently added</h1>
+        <hr className="label-line mb-5" />
+        {categories.slice(0, 3).map((item, index) => (
+          <Card
+            key={index}
+            className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+          >
+            <CardContent className="flex">
+              <CardMedia
+                component="img"
+                height="100"
+                width="100"
+                image={item.image}
+                alt={item.name}
+                className="h-[100px] w-[100px]"
+              />
+              <div className="details ml-3">
+                <Typography
+                  variant="h6"
+                  component="div"
+                  className="mb-2 text-md"
+                >
+                  {item.name}
+                </Typography>
+                <div className="flex items-center">
+                  <Rating value={5} size="small" readOnly />
+                  <Typography
+                    variant="body2"
+                    component="span"
+                    className="ml-1 text-gray-400"
+                  >
+                    5
+                  </Typography>
+                </div>
+                <div className="price mt-1">
+                  <span className="underline text-primary font-semibold">
+                    ₹ 22.50
+                  </span>
+                  <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </Grid>
+      <Grid item xs={3} className="px-5 font-semibold">
+        <h1 className="text-2xl mb-4">Top Rated</h1>
+        <hr className="label-line mb-5" />
+        {categories.slice(0, 3).map((item, index) => (
+          <Card
+            key={index}
+            className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+          >
+            <CardContent className="flex">
+              <CardMedia
+                component="img"
+                height="100"
+                width="100"
+                image={item.image}
+                alt={item.name}
+                className="h-[100px] w-[100px]"
+              />
+              <div className="details ml-3">
+                <Typography
+                  variant="h6"
+                  component="div"
+                  className="mb-2 text-md"
+                >
+                  {item.name}
+                </Typography>
+                <div className="flex items-center">
+                  <Rating value={5} size="small" readOnly />
+                  <Typography
+                    variant="body2"
+                    component="span"
+                    className="ml-1 text-gray-400"
+                  >
+                    5
+                  </Typography>
+                </div>
+                <div className="price mt-1">
+                  <span className="underline text-primary font-semibold">
+                    ₹ 22.50
+                  </span>
+                  <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        className="banner-img10 p-20 min-h-[480px] relative mx-5 rounded-xl "
+      >
+        <h1 className="text-6xl w-4/5 leading-tight font-[700] mb-5">
+          {" "}
+          Stay home & get your daily needs from our shop
+        </h1>
+        <span className="text-gray-400 mt-5 text-xl">
+          Start Your Daily Shopping with{" "}
+          <span className="text-primary"> Nest Mart</span>
+        </span>
+        <div className="email mt-16 flex  bg-white w-[400px] rounded-full overflow-hidden ">
+          <input
+            type="email"
+            name="subscriptionemail"
+            id="subscriptionemail"
+            className="w-[290px] outline-none px-3 text-primary h-[60px]"
+            placeholder="Your Email Address"
+          />
+          <button className="bg-primary h-[60px] w-[110px] font-semibold text-white rounded-full">
+            Subscribe
+          </button>
+        </div>
+        <img
+          src="/banner-9-min.png"
+          className="absolute right-10 bottom-0 h-auto w-3/4 "
+          alt=""
+        />
+      </Grid>
+
+      <Grid
+        item
+        sm={2.2}
+        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
+      >
+        <div className="banner-icon p-5 w-[40%] mr-2  ">
+          <img
+            src="/icons/icon-1.png"
+            className="min-w-[60px] min-h-[50px] h-[50px] "
+            alt=""
+          />
+        </div>
+        <div className="details flex flex-col">
+          <span className="text-lg font-semibold">Best prices & offers</span>
+          <span className="text-gray-400">Orders $50 or more</span>
+        </div>
+      </Grid>
+      <Grid
+        item
+        sm={2.2}
+        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
+      >
+        <div className="banner-icon p-5 w-35%] mr-2  ">
+          <img
+            src="/icons/icon-2.png"
+            className="min-w-[60px] min-h-[50px] h-[50px] "
+            alt=""
+          />
+        </div>
+        <div className="details flex flex-col">
+          <span className="text-lg font-semibold">Free delivery</span>
+          <span className="text-gray-400">24/7 amazing services</span>
+        </div>
+      </Grid>
+      <Grid
+        item
+        sm={2.2}
+        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
+      >
+        <div className="banner-icon p-5 w-[35%] mr-2 ">
+          <img
+            src="/icons/icon-3.png"
+            className="min-w-[60px] min-h-[50px] h-[50px] "
+            alt=""
+          />
+        </div>
+        <div className="details flex flex-col">
+          <span className="text-lg font-semibold">Great daily deal</span>
+          <span className="text-gray-400">When you sign up</span>
+        </div>
+      </Grid>
+      <Grid
+        item
+        sm={2.2}
+        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
+      >
+        <div className="banner-icon p-5 w-[35%] mr-2 ">
+          <img
+            src="/icons/icon-4.png"
+            className="min-w-[60px] min-h-[50px] h-[50px] "
+            alt=""
+          />
+        </div>
+        <div className="details flex flex-col">
+          <span className="text-lg font-semibold">Wide assortment</span>
+          <span className="text-gray-400">Mega Discounts</span>
+        </div>
+      </Grid>
+      <Grid
+        item
+        sm={2.2}
+        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
+      >
+        <div className="banner-icon p-5 w-[35%] mr-2 ">
+          <img
+            src="/icons/icon-5.png"
+            className="min-w-[60px] min-h-[50px] h-[50px] "
+            alt=""
+          />
+        </div>
+        <div className="details flex flex-col">
+          <span className="text-lg font-semibold">Easy returns</span>
+          <span className="text-gray-400">Within 30 days</span>
+        </div>
+      </Grid>
     </Grid>
   );
 }
