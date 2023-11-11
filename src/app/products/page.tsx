@@ -15,132 +15,36 @@ import {
   Rating,
   Slider,
   TextField,
-  ThemeProvider,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
-import "./products.css";
-import React, { useEffect, useState } from "react";
-import { FiFilter } from "react-icons/fi";
+import React, { ChangeEvent, useState } from "react";
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
+import { FiFilter } from "react-icons/fi";
 import { PiShoppingCart } from "react-icons/pi";
-import { theme } from "../mui/theme";
+import "./products.css";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { sliceProducts } from "../redux/products";
 
 const Products: React.FC = () => {
-  // Use useSelector to access the 'products' array from the Redux store
-  const products: { name: string; image: string }[] = [
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-    {
-      name: "Dairy, Bread & Eggs",
-      image: "/categories/dairyandeggs.avif",
-    },
-  ];
+  const dispatch=useDispatch()
+  const products = useSelector((state:RootState)=>state.products.value)
   const [priceRange, setPriceRange] = useState<number[]>([20, 30]);
 
-  const generateMarks = (min: number, max: number) => {
-    const marks = [];
-    for (let i = min; i <= max; i++) {
-      marks.push({ value: i, label: `$${i}` });
-    }
-    return marks;
-  };
+  setTimeout(() => {
+    dispatch(sliceProducts({start:0,end:5}))
+  }, 5000);
 
-  const marks = generateMarks(0, 500);
+  // const generateMarks = (min: number, max: number) => {
+  //   const marks = [];
+  //   for (let i = min; i <= max; i++) {
+  //     marks.push({ value: i, label: `$${i}` });
+  //   }
+  //   return marks;
+  // };
+
+  // const marks = generateMarks(0, 500);
 
   return (
     <Grid container>
@@ -383,7 +287,7 @@ const Products: React.FC = () => {
                 value={priceRange[0]}
                 className="w-1/2 mx-1 rounded-lg  "
                 type="number"
-                onInput={(e) => setPriceRange([+e.target.value, priceRange[1]])}
+                onInput={(e:ChangeEvent<HTMLInputElement>) => setPriceRange([+e.target.value, priceRange[1]])}
                 variant="outlined"
                 error={priceRange[0] < 10 || priceRange[0] > 500}
                 helperText={
@@ -398,7 +302,7 @@ const Products: React.FC = () => {
                 value={priceRange[1]}
                 className="w-1/2 mx-1"
                 type="number"
-                onInput={(e) => setPriceRange([priceRange[0], +e.target.value])}
+                onInput={(e:ChangeEvent<HTMLInputElement>) => setPriceRange([priceRange[0], +e.target.value])}
                 variant="outlined"
                 error={priceRange[0] < 10 || priceRange[0] > 500}
                 helperText={
