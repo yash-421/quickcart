@@ -3,25 +3,20 @@
 @tailwind utilities;
 
 body {
-  background-color: white;
-  box-sizing: border-box;
+  background-color: white !important;
+  box-sizing: border-box !important;
 }
 
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
-  display: none;
+  display: none !important;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
-.MuiMobileStepper-dots {
-  position: absolute !important;
-  bottom: 10% !important;
-  right: 50%;
-  transform: translateX(-50%);
-}
+
 img {
   transition: transform 0.5s;
 }
@@ -32,16 +27,16 @@ img {
 }
 
 .MuiTooltip-tooltip {
-  --tw-text-opacity: 1;
-  background-color: rgb(59 183 126 / var(--tw-text-opacity));
+  --tw-text-opacity: 1 !important;
+  background-color: rgb(59 183 126 / var(--tw-text-opacity)) !important ;
 }
 .MuiTooltip-tooltipArrow {
-  --tw-text-opacity: 1;
-  background-color: rgb(59 183 126 / var(--tw-text-opacity));
+  --tw-text-opacity: 1 !important;
+  background-color: rgb(59 183 126 / var(--tw-text-opacity)) !important;
 }
 .MuiTooltip-arrow {
-  --tw-text-opacity: 1;
-  color: rgb(59 183 126 / var(--tw-text-opacity));
+  --tw-text-opacity: 1 !important;
+  color: rgb(59 183 126 / var(--tw-text-opacity)) !important;
 }
 
 .options {
@@ -78,3 +73,5 @@ img {
   width: 124px;
   position: absolute;
 }
+
+

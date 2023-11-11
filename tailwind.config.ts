@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  important: true,
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -33,7 +34,7 @@ const config: Config = {
         background_3: "#def9ec",
         border_color1: "#ececec",
         border_color2: "#bce3c9",
-        dark:'#29a56c'
+        dark: '#29a56c'
       },
       fontSize: {
         xxs: "12px",

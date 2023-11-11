@@ -10,13 +10,13 @@ import {
   Paper,
   Rating,
   Tooltip,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import {
   AiOutlineArrowRight,
   AiOutlineEye,
-  AiOutlineHeart
+  AiOutlineHeart,
 } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { PiShoppingCart } from "react-icons/pi";
@@ -53,6 +53,33 @@ const colorClasses = [
   "bg-[#f2fce4]",
   "bg-[#fff3eb]",
   "bg-[#fff3ff]",
+];
+const gridItems = [
+  {
+    icon: "/icons/icon-1.png",
+    title: "Fresh Produce",
+    description: "Locally sourced, organic fruits and vegetables",
+  },
+  {
+    icon: "/icons/icon-2.png",
+    title: "Fast Delivery",
+    description: "Quick and reliable doorstep delivery services",
+  },
+  {
+    icon: "/icons/icon-3.png",
+    title: "Special Discounts",
+    description: "Exclusive deals and discounts on a wide range of products",
+  },
+  {
+    icon: "/icons/icon-4.png",
+    title: "Quality Assurance",
+    description: "Guaranteed quality products from trusted suppliers",
+  },
+  {
+    icon: "/icons/icon-5.png",
+    title: "Customer Support",
+    description: "24/7 customer support to assist you with any queries",
+  },
 ];
 
 export default function Home() {
@@ -180,10 +207,11 @@ export default function Home() {
           stopAutoPlayOnHover
           navButtonsAlwaysVisible
           navButtonsProps={{
-            className:'bg-gray-200 group-hover:text-white group-hover:opacity-[1!important] group-hover:bg-primary text-black  '
+            className:
+              "bg-gray-200 group-hover:text-white group-hover:opacity-[1!important] group-hover:bg-primary text-black  ",
           }}
           navButtonsWrapperProps={{
-            className:'group'
+            className: "group",
           }}
         >
           {steps.map((item, index) => (
@@ -600,7 +628,6 @@ export default function Home() {
           </Card>
         ))}
       </Grid>
-
       <Grid
         item
         xs={12}
@@ -622,7 +649,7 @@ export default function Home() {
             className="w-[290px] outline-none px-3 text-primary h-[60px]"
             placeholder="Your Email Address"
           />
-          <button className="bg-primary h-[60px] w-[110px] font-semibold text-white rounded-full">
+          <button className="bg-primary h-[60px] w-[110px] hover:bg-dark cursor-pointer font-semibold text-white rounded-full">
             Subscribe
           </button>
         </div>
@@ -632,92 +659,29 @@ export default function Home() {
           alt=""
         />
       </Grid>
-
-      <Grid
-        item
-        sm={2.2}
-        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
-      >
-        <div className="banner-icon p-5 w-[40%] mr-2  ">
-          <img
-            src="/icons/icon-1.png"
-            className="min-w-[60px] min-h-[50px] h-[50px] "
-            alt=""
-          />
-        </div>
-        <div className="details flex flex-col">
-          <span className="text-lg font-semibold">Best prices & offers</span>
-          <span className="text-gray-400">Orders $50 or more</span>
-        </div>
-      </Grid>
-      <Grid
-        item
-        sm={2.2}
-        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
-      >
-        <div className="banner-icon p-5 w-35%] mr-2  ">
-          <img
-            src="/icons/icon-2.png"
-            className="min-w-[60px] min-h-[50px] h-[50px] "
-            alt=""
-          />
-        </div>
-        <div className="details flex flex-col">
-          <span className="text-lg font-semibold">Free delivery</span>
-          <span className="text-gray-400">24/7 amazing services</span>
-        </div>
-      </Grid>
-      <Grid
-        item
-        sm={2.2}
-        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
-      >
-        <div className="banner-icon p-5 w-[35%] mr-2 ">
-          <img
-            src="/icons/icon-3.png"
-            className="min-w-[60px] min-h-[50px] h-[50px] "
-            alt=""
-          />
-        </div>
-        <div className="details flex flex-col">
-          <span className="text-lg font-semibold">Great daily deal</span>
-          <span className="text-gray-400">When you sign up</span>
-        </div>
-      </Grid>
-      <Grid
-        item
-        sm={2.2}
-        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
-      >
-        <div className="banner-icon p-5 w-[35%] mr-2 ">
-          <img
-            src="/icons/icon-4.png"
-            className="min-w-[60px] min-h-[50px] h-[50px] "
-            alt=""
-          />
-        </div>
-        <div className="details flex flex-col">
-          <span className="text-lg font-semibold">Wide assortment</span>
-          <span className="text-gray-400">Mega Discounts</span>
-        </div>
-      </Grid>
-      <Grid
-        item
-        sm={2.2}
-        className=" m-auto bg-background_3 flex p-4 items-center rounded-xl my-10 "
-      >
-        <div className="banner-icon p-5 w-[35%] mr-2 ">
-          <img
-            src="/icons/icon-5.png"
-            className="min-w-[60px] min-h-[50px] h-[50px] "
-            alt=""
-          />
-        </div>
-        <div className="details flex flex-col">
-          <span className="text-lg font-semibold">Easy returns</span>
-          <span className="text-gray-400">Within 30 days</span>
-        </div>
-      </Grid>
+      {gridItems.map((item, index) => (
+        <Grid
+          item
+          sm={2.2}
+          key={index}
+          className="m-auto bg-background_3 flex flex-col p-4 items-center rounded-xl justify-around my-5 hover:shadow-lg transition duration-300"
+          style={{ height: "200px", width: "150px" }} // Set fixed height and width here
+        >
+          <div className="banner-icon p-5 ">
+            <img
+              src={item.icon}
+              className="min-w-[60px] min-h-[50px] h-[50px] transform transition duration-300 hover:scale-110"
+              alt=""
+            />
+          </div>
+          <div className="details flex flex-col items-center">
+            <span className="text-lg font-semibold">{item.title}</span>
+            <span className="text-gray-400 text-center">
+              {item.description}
+            </span>
+          </div>
+        </Grid>
+      ))}
     </Grid>
   );
 }

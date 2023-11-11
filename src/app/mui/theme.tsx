@@ -9,6 +9,6 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#fdc040",
-    },
+    }
   },
 });
