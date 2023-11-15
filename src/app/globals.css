@@ -16,7 +16,6 @@ input::-webkit-outer-spin-button {
   display: none !important;
 }
 
-
 img {
   transition: transform 0.5s;
 }
@@ -73,5 +72,6 @@ img {
   width: 124px;
   position: absolute;
 }
-
-
+.transition1 {
+  transition: 0.3s all ease-out;
+}

@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./products"; // Import your products reducer
+
 import { createWrapper, MakeStore } from "next-redux-wrapper";
+import gridItems from "./gridItems";
 
 // Create your store
 const makeStore = () =>
   configureStore({
     reducer: {
-      products: productsReducer, // Use the products reducer
+      products: productsReducer,
+      gridItems,
     },
   });
 

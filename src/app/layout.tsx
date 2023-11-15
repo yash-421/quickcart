@@ -5,6 +5,7 @@ import ThemeRegistry from "./mui/ThemeRegistry";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { ReduxProvider } from "./redux/provider";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -33,6 +34,21 @@ export default function RootLayout({
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </head>
       <body className={inter.className}>
+      <NextTopLoader
+        color="#2299DD"
+        initialPosition={0.08}
+        crawlSpeed={200}
+        height={3}
+        crawl={true}
+        showSpinner={true}
+        easing="ease"
+        speed={200}
+        shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+        template='<div class="bar" role="bar"><div class="peg"></div></div> 
+            <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
+        zIndex={1600}
+        showAtBottom={false}
+      />
         <ReduxProvider>
           <ThemeRegistry options={{ key: "mui-theme" }}>
             {children}

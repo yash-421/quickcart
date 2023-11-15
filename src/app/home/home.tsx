@@ -22,6 +22,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { PiShoppingCart } from "react-icons/pi";
 import Carousel from "react-material-ui-carousel";
 import SliderProductList from "../components/sliderProductList";
+import Layout from "../shared/userLayout";
 const steps = [
   {
     label: "Select campaign settings",
@@ -53,33 +54,6 @@ const colorClasses = [
   "bg-[#f2fce4]",
   "bg-[#fff3eb]",
   "bg-[#fff3ff]",
-];
-const gridItems = [
-  {
-    icon: "/icons/icon-1.png",
-    title: "Fresh Produce",
-    description: "Locally sourced, organic fruits and vegetables",
-  },
-  {
-    icon: "/icons/icon-2.png",
-    title: "Fast Delivery",
-    description: "Quick and reliable doorstep delivery services",
-  },
-  {
-    icon: "/icons/icon-3.png",
-    title: "Special Discounts",
-    description: "Exclusive deals and discounts on a wide range of products",
-  },
-  {
-    icon: "/icons/icon-4.png",
-    title: "Quality Assurance",
-    description: "Guaranteed quality products from trusted suppliers",
-  },
-  {
-    icon: "/icons/icon-5.png",
-    title: "Customer Support",
-    description: "24/7 customer support to assist you with any queries",
-  },
 ];
 
 export default function Home() {
@@ -187,6 +161,7 @@ export default function Home() {
   ]);
 
   return (
+    <Layout title="Home" >
     <Grid container>
       <Grid item xs={12} className="m-5 ">
         <Carousel
@@ -194,6 +169,7 @@ export default function Home() {
           animation="slide"
           duration={500}
           height={"400px"}
+          
           indicatorIconButtonProps={{
             className:
               "text-primary opacity-10 hover:text-dark hover:opacity-100 mx-1 overflow-hidden ",
@@ -240,18 +216,18 @@ export default function Home() {
       </Grid>
       <Grid item xs={8} className="flex items-center justify-start">
         <Chip
-          label="Chip Filled"
-          className="mx-2 text-sm border-primary text-text hover:bg-primary hover:text-white cursor-pointer font-medium"
+          label="Chip Filled" 
+          className="text-sm border-primary text-text hover:bg-primary hover:text-white cursor-pointer font-medium"
           variant="outlined"
         />
         <Chip
-          label="Chip Filled"
-          className="mx-2 text-sm border-primary text-text hover:bg-primary hover:text-white cursor-pointer font-medium"
+          label="Chip Filled" 
+          className="text-sm border-primary text-text hover:bg-primary hover:text-white cursor-pointer font-medium"
           variant="outlined"
         />
         <Chip
-          label="Chip Filled"
-          className="mx-2 text-sm border-primary text-text hover:bg-primary hover:text-white cursor-pointer font-medium"
+          label="Chip Filled" 
+          className="text-sm border-primary text-text hover:bg-primary hover:text-white cursor-pointer font-medium"
           variant="outlined"
         />
       </Grid>
@@ -391,6 +367,7 @@ export default function Home() {
                       value={5}
                       size="small"
                       className=" mt-3"
+                      id={`Rating${index}`}
                     />
                     <span className="text-text mt-2 text-md">
                       By <span className="text-primary"> Yash Choudhary</span>
@@ -475,6 +452,7 @@ export default function Home() {
                     variant="body2"
                     component="span"
                     className="ml-1 text-gray-400"
+                    id={`rate${index}`}
                   >
                     5
                   </Typography>
@@ -521,7 +499,8 @@ export default function Home() {
                     variant="body2"
                     component="span"
                     className="ml-1 text-gray-400"
-                  >
+                    id={`Start${index}`}
+                    >
                     5
                   </Typography>
                 </div>
@@ -562,7 +541,7 @@ export default function Home() {
                   {item.name}
                 </Typography>
                 <div className="flex items-center">
-                  <Rating value={5} size="small" readOnly />
+                  <Rating value={5} size="small" id={`ratingstar${index}`} readOnly />
                   <Typography
                     variant="body2"
                     component="span"
@@ -608,7 +587,7 @@ export default function Home() {
                   {item.name}
                 </Typography>
                 <div className="flex items-center">
-                  <Rating value={5} size="small" readOnly />
+                  <Rating value={5} size="small" id={`allStart${index}`} readOnly />
                   <Typography
                     variant="body2"
                     component="span"
@@ -628,60 +607,7 @@ export default function Home() {
           </Card>
         ))}
       </Grid>
-      <Grid
-        item
-        xs={12}
-        className="banner-img10 p-20 min-h-[480px] relative mx-5 rounded-xl "
-      >
-        <h1 className="text-6xl w-4/5 leading-tight font-[700] mb-5">
-          {" "}
-          Stay home & get your daily needs from our shop
-        </h1>
-        <span className="text-gray-400 mt-5 text-xl">
-          Start Your Daily Shopping with{" "}
-          <span className="text-primary"> Nest Mart</span>
-        </span>
-        <div className="email mt-16 flex  bg-white w-[400px] rounded-full overflow-hidden ">
-          <input
-            type="email"
-            name="subscriptionemail"
-            id="subscriptionemail"
-            className="w-[290px] outline-none px-3 text-primary h-[60px]"
-            placeholder="Your Email Address"
-          />
-          <button className="bg-primary h-[60px] w-[110px] hover:bg-dark cursor-pointer font-semibold text-white rounded-full">
-            Subscribe
-          </button>
-        </div>
-        <img
-          src="/banner-9-min.png"
-          className="absolute right-10 bottom-0 h-auto w-3/4 "
-          alt=""
-        />
-      </Grid>
-      {gridItems.map((item, index) => (
-        <Grid
-          item
-          sm={2.2}
-          key={index}
-          className="m-auto bg-background_3 flex flex-col p-4 items-center rounded-xl justify-around my-5 hover:shadow-lg transition duration-300"
-          style={{ height: "200px", width: "150px" }} // Set fixed height and width here
-        >
-          <div className="banner-icon p-5 ">
-            <img
-              src={item.icon}
-              className="min-w-[60px] min-h-[50px] h-[50px] transform transition duration-300 hover:scale-110"
-              alt=""
-            />
-          </div>
-          <div className="details flex flex-col items-center">
-            <span className="text-lg font-semibold">{item.title}</span>
-            <span className="text-gray-400 text-center">
-              {item.description}
-            </span>
-          </div>
-        </Grid>
-      ))}
     </Grid>
+    </Layout>
   );
 }
