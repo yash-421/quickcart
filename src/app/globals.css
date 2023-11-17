@@ -5,6 +5,7 @@
 body {
   background-color: white !important;
   box-sizing: border-box !important;
+  scroll-behavior: smooth;
 }
 
 input::-webkit-inner-spin-button,
@@ -73,5 +74,10 @@ img {
   position: absolute;
 }
 .transition1 {
-  transition: 0.3s all ease-out;
+  transition: 0.3s all ease-out !important;
+
+}
+
+.rotate{
+  transform: rotateX(66deg) rotateY(-1deg) !important;
 }

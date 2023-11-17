@@ -35,7 +35,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
       <NextTopLoader
-        color="#2299DD"
+        color="#fdc040"
         initialPosition={0.08}
         crawlSpeed={200}
         height={3}
@@ -48,6 +48,7 @@ export default function RootLayout({
             <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
         zIndex={1600}
         showAtBottom={false}
+        
       />
         <ReduxProvider>
           <ThemeRegistry options={{ key: "mui-theme" }}>

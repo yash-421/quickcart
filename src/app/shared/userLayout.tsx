@@ -3,6 +3,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import {
   Avatar,
   Breadcrumbs,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
   Chip,
   Divider,
   Drawer,
@@ -34,7 +38,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { deepOrange } from "@mui/material/colors";
-
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 const Layout = ({
   children,
   title,
@@ -63,7 +68,7 @@ const Layout = ({
       if (scrollPosition <= 450) {
         setScrollClass("-translate-y-full absolute");
       } else if (scrollPosition > 450) {
-        setScrollClass("transition-transform fixed translate-y-0");
+        setScrollClass(" fixed translate-y-0 transition1");
       } else {
         setScrollClass(
           " w-[95%] right-[50%] left-[50%] -translate-x-[50%] mt-2 rounded-xl absolute"
@@ -125,7 +130,7 @@ const Layout = ({
   }));
 
   return (
-    <main>
+    <>
       <Head>
         <title>{title}</title>
       </Head>
@@ -234,11 +239,8 @@ const Layout = ({
               >
                 Products <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Trash"
                         primaryTypographyProps={{
@@ -248,11 +250,8 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Spam"
                         primaryTypographyProps={{
@@ -270,11 +269,8 @@ const Layout = ({
               >
                 Products <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Trash"
                         primaryTypographyProps={{
@@ -284,11 +280,8 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Spam"
                         primaryTypographyProps={{
@@ -306,11 +299,8 @@ const Layout = ({
               >
                 Products <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Trash"
                         primaryTypographyProps={{
@@ -320,11 +310,8 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Spam"
                         primaryTypographyProps={{
@@ -342,11 +329,8 @@ const Layout = ({
               >
                 Products <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Trash"
                         primaryTypographyProps={{
@@ -356,11 +340,8 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem
-                    disablePadding
-                    className="hover:bg-dark hover:text-color_9 text-gray-600"
-                  >
-                    <ListItemButton>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Spam"
                         primaryTypographyProps={{
@@ -393,7 +374,7 @@ const Layout = ({
 
       <Breadcrumbs
         aria-label="breadcrumb"
-        className="mt-24 border-2 p-5 mx-2 rounded-lg"
+        className="mt-24 border-2 p-5 border-x-0 "
       >
         <Stack direction="row" spacing={1}>
           <Chip
@@ -407,65 +388,180 @@ const Layout = ({
         </Stack>
       </Breadcrumbs>
       <div className="mt-16"></div>
-      {children}
-
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          className="banner-img10 p-20 min-h-[480px] relative mx-5 rounded-xl "
-        >
-          <h1 className="text-6xl w-4/5 leading-tight font-[700] mb-5">
-            {" "}
-            Stay home & get your daily needs from our shop
-          </h1>
-          <span className="text-gray-400 mt-5 text-xl">
-            Start Your Daily Shopping with{" "}
-            <span className="text-primary"> Nest Mart</span>
-          </span>
-          <div className="email mt-16 flex  bg-white w-[400px] rounded-full overflow-hidden ">
-            <input
-              type="email"
-              name="subscriptionemail"
-              id="subscriptionemail"
-              className="w-[290px] outline-none px-3 text-primary h-[60px]"
-              placeholder="Your Email Address"
-            />
-            <button className="bg-primary h-[60px] w-[110px] hover:bg-dark cursor-pointer z-10 font-semibold text-white rounded-full">
-              Subscribe
-            </button>
-          </div>
-          <img
-            src="/banner-9-min.png"
-            className="absolute right-10 bottom-0 h-auto w-3/4 "
-            alt=""
-          />
-        </Grid>
-        {gridItems.map((item, index) => (
+      <main>{children}</main>
+      <footer>
+        <Grid container>
           <Grid
             item
-            sm={2.2}
-            key={index}
-            className="m-auto bg-background_3 flex flex-col p-4 items-center rounded-xl justify-around my-5 hover:shadow-lg transition duration-300"
-            style={{ height: "200px", width: "150px" }} // Set fixed height and width here
+            xs={12}
+            className="banner-img10 p-20 min-h-[480px] relative mx-5 rounded-xl "
           >
-            <div className="banner-icon p-5 ">
-              <img
-                src={item.icon}
-                className="min-w-[60px] min-h-[50px] h-[50px] transform transition duration-300 hover:scale-110"
-                alt=""
+            <h1 className="text-6xl w-4/5 leading-tight font-[700] mb-5">
+              {" "}
+              Stay home & get your daily needs from our shop
+            </h1>
+            <span className="text-gray-400 mt-5 text-xl">
+              Start Your Daily Shopping with{" "}
+              <span className="text-primary"> Nest Mart</span>
+            </span>
+            <div className="email mt-16 flex  bg-white w-[400px] rounded-full overflow-hidden ">
+              <input
+                type="email"
+                name="subscriptionemail"
+                id="subscriptionemail"
+                className="w-[290px] outline-none px-3 text-primary h-[60px]"
+                placeholder="Your Email Address"
               />
+              <button className="bg-primary h-[60px] w-[110px] hover:bg-dark cursor-pointer z-10 font-semibold text-white rounded-full">
+                Subscribe
+              </button>
             </div>
-            <div className="details flex flex-col items-center">
-              <span className="text-lg font-semibold">{item.title}</span>
-              <span className="text-gray-400 text-center">
-                {item.description}
-              </span>
-            </div>
+            <img
+              src="/banner-9-min.png"
+              className="absolute right-10 bottom-0 h-auto w-3/4 "
+              alt=""
+            />
           </Grid>
-        ))}
-      </Grid>
-    </main>
+          {gridItems.slice(0, 5).map((item, index) => (
+            <Grid
+              item
+              sm={2.2}
+              key={index}
+              className="m-auto bg-background_3 flex flex-col p-4 items-center rounded-xl justify-around my-5 hover:shadow-lg transition duration-300"
+              style={{ height: "200px", width: "150px" }} // Set fixed height and width here
+            >
+              <div className="banner-icon p-5 ">
+                <img
+                  src={item.icon}
+                  className="min-w-[60px] min-h-[50px] h-[50px] transform transition duration-300 hover:scale-110"
+                  alt=""
+                />
+              </div>
+              <div className="details flex flex-col items-center">
+                <span className="text-lg font-semibold">{item.title}</span>
+                <span className="text-gray-400 text-center">
+                  {item.description}
+                </span>
+              </div>
+            </Grid>
+          ))}
+
+          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+            <Card className="shadow-none flex items-center bg-background_3 flex-col h-full justify-center">
+              <img
+                src="/logo.png"
+                alt="logo"
+                className="w-1/2 mt-5 mix-blend-luminosity"
+              />
+              <CardActions className="justify-center mt-5 ">
+                <Button
+                  size="small"
+                  className=" bg-dark min-w-0 p-3 text-white text-2xl shadow-xl rounded-full"
+                >
+                  <FaFacebook />
+                </Button>
+                <Button
+                  size="small"
+                  className=" bg-dark min-w-0 p-3 text-white text-2xl shadow-xl rounded-full"
+                >
+                  <FaInstagram />
+                </Button>
+                <Button
+                  size="small"
+                  className=" bg-dark min-w-0 p-3 text-white text-2xl shadow-xl rounded-full"
+                >
+                  <FaSquareXTwitter />
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+            <Typography variant="h6" mb={0.2}>
+              Explore
+            </Typography>
+            <List>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+                <Typography component="a" variant="subtitle1" href="/aboutus">
+                  About Us{" "}
+                </Typography>
+              </ListItem>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+                <Typography
+                  component="a"
+                  variant="subtitle1"
+                  href="/contactus"
+                >
+                  Contact Us{" "}
+                </Typography>
+              </ListItem>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <Typography component="a" variant="subtitle1" href="/24X7">
+                24 X 7{" "}
+                </Typography>
+              </ListItem>
+            </List>
+          </Grid>
+          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+            <Typography variant="h6" mb={0.2}>
+              Help & Support
+            </Typography>
+            <List>
+              <ListItem className="pl-0 py-1 cursor-pointer">
+                <Typography
+                  component="a"
+                  variant="subtitle1"
+                  href="/refundpolicy"
+                >
+                  Refund Policy{" "}
+                </Typography>
+              </ListItem>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <Typography component="a" variant="subtitle1" href="/privacypolicy">
+                Privacy Policy{" "}
+                </Typography>
+              </ListItem>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <Typography component="a" variant="subtitle1" href="/termandconditions">
+                Terms & Conditions{" "}
+                </Typography>
+              </ListItem>
+            </List>
+          </Grid>
+          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+            <Typography variant="h6" mb={0.2}>
+              Contact Details
+            </Typography>
+            <List>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+                <a href="tel:1234567890">1234567890</a>
+              </ListItem>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+                <a href="mailto:johndoe@gmail.com">johndoe@gmail.com</a>
+              </ListItem>
+              <ListItem className="pl-0 py-1 cursor-pointer ">
+                <a
+                  href="https://maps.app.goo.gl/RvipSLK3zCmStNWy5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  123 Main Street Anytown, USA 12345
+                </a>
+              </ListItem>
+            </List>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            className=" bg-background_3 mt-0 border-t-2 border-t-primary py-2 "
+          >
+            <Typography variant="subtitle1" mb={0.2} className=" text-center ">
+              Quick Cart © 2022. All Rights Reserved. Design and Developed by
+              Yash Choudhary
+            </Typography>
+          </Grid>
+        </Grid>
+      </footer>
+    </>
   );
 };
 

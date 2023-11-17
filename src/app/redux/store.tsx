@@ -3,6 +3,9 @@ import productsReducer from "./products"; // Import your products reducer
 
 import { createWrapper, MakeStore } from "next-redux-wrapper";
 import gridItems from "./gridItems";
+import user from "./user";
+import cart from "./cart";
+
 
 // Create your store
 const makeStore = () =>
@@ -10,6 +13,8 @@ const makeStore = () =>
     reducer: {
       products: productsReducer,
       gridItems,
+      user,
+      cart
     },
   });
 

@@ -32,10 +32,16 @@ const initialState: ProductsState = {
       description: "Guaranteed quality products from trusted suppliers",
     },
     {
-      icon: "/icons/icon-5.png",
-      title: "Customer Support",
-      description: "24/7 customer support to assist you with any queries",
+      "icon": "/icons/icon-5.png",
+      "title": "Customer Support",
+      "description": "24/7 customer support to assist you with any queries"
     },
+    {
+      "icon": "/icons/icon-6.png",
+      "title": "Great Daily Deal",
+      "description": "Exciting daily deals to save you money on your favorite products"
+    }
+    
   ],
 };
 
