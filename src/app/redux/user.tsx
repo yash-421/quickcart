@@ -4,7 +4,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface UserDetails {
   name: string;
   address: string;
-  mobileNumber: string;
+  number: string;
+  email: string;
 }
 
 interface UserState {
@@ -15,7 +16,8 @@ const initialState: UserState = {
   value: {
     name: "John Doe",
     address: "123 Main St, Cityville",
-    mobileNumber: "123-456-7890",
+    number: "1234567890",
+    email: "john@gmail.com",
   },
 };
 
