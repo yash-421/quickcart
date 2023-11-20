@@ -14,10 +14,8 @@ import {
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-const mapContainerStyle = {
-  width: "100px",
-  height: "100px",
-};
+import Link from "next/link";
+
 const center = {
   lat: 7.2905715, // default latitude
   lng: 80.6337262, // default longitude
@@ -35,18 +33,6 @@ const SignUp = () => {
     otpSent: false,
     otpVerified: false,
   });
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDR_wTJuh3e7yJSHqKiWaLhNpdHCm7z7rI",
-    libraries: ["places"],
-  });
-
-  if (loadError) {
-    return <div>Error loading maps</div>;
-  }
-
-  if (!isLoaded) {
-    return <div>Loading maps</div>;
-  }
 
   const signUpValidation = Yup.object().shape({
     name: Yup.string().required("*Name is Required"),
@@ -71,7 +57,6 @@ const SignUp = () => {
     setCredential((info) => ({ ...info, address }));
   };
 
-
   const signUp = (info: any, { setSubmitting, resetForm }: any) => {
     console.log(credentials, info);
     console.log("Sign Up");
@@ -95,21 +80,42 @@ const SignUp = () => {
 
   return (
     <Layout title="Sign Up">
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={10}
-        center={center}
-      >
-        <Marker position={center} />
-      </GoogleMap>
       <Grid
         container
-        className="px-20 h-[500px] w-full object-contain rounded-xl bg-cover my-5 "
+        className="px-20 w-full object-contain rounded-xl bg-cover my-5 "
       >
-        <Grid item xs={6} className="bg-[url('/signup.png')]">
-          <Box className=""></Box>
+        <Grid
+          item
+          xs={6}
+          className="bg-[url('/login.jpg')] bg-center bg-cover rounded-tl-xl rounded-bl-xl flex justify-center flex-col p-10 items-center "
+        >
+          <Typography
+            variant="h5"
+            component="h1"
+            className="text-2xl my-5 font-bold"
+          >
+            Welcome To Quick Cart
+          </Typography>
+          <Typography
+            variant="body1"
+            className="mt-5 text-gray-950 backdrop-filter"
+          >
+            Discover a world of convenience and fast shopping at Quick Cart.
+            Join us today for an amazing shopping experience!
+          </Typography>
+          <Typography
+            variant="body1"
+            style={{
+              marginBottom: "1rem",
+              color: "#333",
+              textAlign: "center",
+            }}
+            className="mt-5 text-gray-500"
+          >
+            Already have an account? <Link href={"/signin"} className="text-dark" >Login</Link>
+          </Typography>
         </Grid>
-        <Grid item xs={6} className="p-10 py-2">
+        <Grid item xs={6} className="h-full ">
           <Formik
             initialValues={credentials}
             onSubmit={signUp}
@@ -117,7 +123,7 @@ const SignUp = () => {
             validateOnChange
           >
             {({ errors, touched, isValid }) => (
-              <Form className="border-[1px] border-gray-300 rounded-xl bg-background_3 flex justify-center p-5 items-center h-full ">
+              <Form className="border-[1px] border-gray-300 rounded-tr-xl rounded-br-xl   bg-background_3 flex justify-center p-5 items-center h-full ">
                 <FormControl>
                   <FormGroup>
                     <Box className="flex  flex-col items-start">
@@ -181,7 +187,6 @@ const SignUp = () => {
                         )}
 
                       {/* Address Field */}
-                      
 
                       {/* City Field */}
                       <FormControlLabel

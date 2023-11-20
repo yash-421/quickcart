@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { Field, Form, Formik, FormikHelpers, FormikValues } from "formik";
 import * as Yup from "yup";
+import Link from "next/link";
 
 const Login = () => {
   const [credentials, setCredential] = useState({
@@ -60,10 +61,40 @@ const Login = () => {
         container
         className="px-20 h-[500px] w-full object-contain rounded-xl bg-cover my-5 "
       >
-        <Grid item xs={6} className="bg-[url('/login.png')]">
-          <Box className=""></Box>
+        <Grid
+          item
+          xs={6}
+          className="bg-[url('/login.jpg')] bg-center bg-cover rounded-tl-xl rounded-bl-xl flex justify-center flex-col p-10 items-center "
+        >
+          <Typography
+            variant="h5"
+            component="h1"
+            className="text-2xl my-5 font-bold"
+          >
+            Welcome Back to Quick Cart
+          </Typography>
+          <Typography
+            variant="body1"
+            className="mt-5 text-black backdrop-filter"
+          >
+            Log in to your account for a seamless shopping experience.
+          </Typography>
+          <Typography
+            variant="body1"
+            style={{
+              marginBottom: "1rem",
+              color: "#333",
+              textAlign: "center",
+            }}
+            className="mt-5 text-gray-500"
+          >
+            Already have an account?{" "}
+            <Link href={"/signup"} className="text-dark">
+              Login
+            </Link>
+          </Typography>
         </Grid>
-        <Grid item xs={6} className="p-10 py-2">
+        <Grid item xs={6} className="">
           <Formik
             initialValues={credentials}
             onSubmit={login}
@@ -71,7 +102,7 @@ const Login = () => {
             validateOnChange
           >
             {({ errors, touched, isValid }) => (
-              <Form className="border-[1px] border-gray-300 rounded-xl bg-background_3 flex justify-center p-5 items-center h-full ">
+              <Form className="border-[1px] border-gray-300 rounded-tr-xl rounded-br-xl bg-background_3 flex justify-center p-5 items-center h-full ">
                 <FormControl>
                   <FormGroup>
                     <Box className="flex  flex-col items-start">
@@ -95,7 +126,7 @@ const Login = () => {
                           {errors.number}
                         </Typography>
                       )}
-                      {  !credentials.otpSent && (
+                      {!credentials.otpSent && (
                         <Button
                           variant="text"
                           className="self-center"

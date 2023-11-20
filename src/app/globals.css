@@ -81,3 +81,11 @@ img {
 .rotate{
   transform: rotateX(66deg) rotateY(-1deg) !important;
 }
+
+.filter{
+  filter: drop-shadow(0px 5px 3px black) !important;
+}
+
+.mui-theme-wjh20t-MuiPagination-ul{
+  justify-content: center !important;
+}
