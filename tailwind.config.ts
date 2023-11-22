@@ -50,6 +50,14 @@ const config: Config = {
         box_shadow_2: "5px 5px 15px rgba(0,0,0,.05)",
         box_shadow_3: "20px 20px 54px rgba(0,0,0,.03)",
         box_shadow_3_hover: " 20px 20px 54px rgba(0,0,0,.05)",
+      },
+      screens: {
+        'xs': '0px',
+        'sm': '600px',
+        'md': '900px',
+        'lg': '1200px',
+        'xl': '1536px',
+
       }
     },
   },

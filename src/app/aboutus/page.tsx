@@ -51,18 +51,18 @@ const aboutus = () => {
   }, [inView]);
   
   return (
-    <Layout title="aboutus">
+    <Layout title="About Us">
       <Grid container spacing={2} className="p-5">
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6} className=" ">
           <Box>
             <img
               src="/about-1.png"
               alt="About Us Image"
-              className=" rounded-lg"
+              className=" rounded-lg md:mt-24"
             />
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Box>
             <Typography
               variant="h4"
@@ -96,10 +96,10 @@ const aboutus = () => {
               voluptate id est laborum.
             </Typography>
 
-            <Card className="mt-14 shadow-none">
+            <Card className="mt-14 md:mt-0 shadow-none w-full">
               <CardContent className="relative">
                 <div
-                  className="img-container flex flex-nowrap overflow-x-auto h-64 w-full scroll-smooth"
+                  className="img-container flex flex-nowrap overflow-x-auto  w-full scroll-smooth"
                   ref={imgContainer}
                 >
                   {products.map((product, index) => {
@@ -110,7 +110,7 @@ const aboutus = () => {
                       >
                         <img
                           src={product.icon}
-                          className=" h-full w-4/5"
+                          className=" object-contain"
                           alt={product.title}
                         />
                       </div>
@@ -135,7 +135,7 @@ const aboutus = () => {
             </Card>
           </Box>
         </Grid>
-        <Grid item xs={12} className="text-center my-5">
+        <Grid item xs={12} md={12} className="text-center my-5">
           <Typography
             variant="h4"
             className=" font-medium relative"
@@ -151,7 +151,7 @@ const aboutus = () => {
         </Grid>
         {products.map((product, index) => {
           return (
-            <Grid item xs={4} key={index}>
+            <Grid item xs={12} md={6} lg={4}  key={index}>
               <Card className="flex flex-col items-center p-5 border-[1px] border-gray-200 rounded-2xl shadow-none  hover:shadow-xl ">
                 <CardMedia
                   image={product.icon}
@@ -182,7 +182,7 @@ const aboutus = () => {
             </Grid>
           );
         })}
-        <Grid item xs={4} className="my-5 p-5 px-10 ">
+        <Grid item xs={12} lg={4} md={6} className="my-5 p-5 px-10 ">
           <Typography variant="h4" className=" font-medium " component="h5">
             {" "}
             Who we are
@@ -198,7 +198,7 @@ const aboutus = () => {
             quaerat suscipit doloribus!
           </Typography>
         </Grid>
-        <Grid item xs={4} className="my-5 p-5 px-10 ">
+        <Grid item xs={12} lg={4} md={6} className="my-5 p-5 px-10 ">
           <Typography variant="h4" className=" font-medium " component="h5">
             {" "}
             Our history
@@ -214,7 +214,7 @@ const aboutus = () => {
             quaerat suscipit doloribus!
           </Typography>
         </Grid>
-        <Grid item xs={4} className="my-5 p-5 px-10 ">
+        <Grid item xs={12} lg={4} md={12} className="my-5 p-5 px-10 ">
           <Typography variant="h4" className=" font-medium " component="h5">
             {" "}
             Our mission
@@ -230,14 +230,14 @@ const aboutus = () => {
             quaerat suscipit doloribus!
           </Typography>
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={12} item className="  ">
           <Box
-            sx={{ backgroundImage: 'url("/about-9.png")', height: 400 }}
-            className="bg-center bg-no-repeat bg-cover bg-fixed transition-opacity rounded-2xl overflow-hidden "
+            sx={{ backgroundImage: 'url("/about-9.png")' }}
+            className="bg-center bg-no-repeat bg-cover bg-fixed lg:h-72 transition-opacity rounded-2xl overflow-hidden "
             ref={ref}
           >
-            <div className="allCounts flex items-center justify-around h-full bg-black opacity-50">
-            <div className="count">
+            <div className="allCounts lg:flex-row flex  flex-col items-center justify-around h-full bg-black opacity-50">
+            <div className="count my-7 lg:px-2">
               <Typography
                 component="h6"
                 variant="h4"
@@ -255,7 +255,7 @@ const aboutus = () => {
                 Glorious years
               </Typography>
             </div>
-            <div className="count">
+            <div className="count my-7 lg:px-2">
               <Typography
                 component="h6"
                 variant="h4"
@@ -273,7 +273,7 @@ const aboutus = () => {
                 Happy clients
               </Typography>
             </div>
-            <div className="count">
+            <div className="count my-7 lg:px-2">
               <Typography
                 component="h6"
                 variant="h4"
@@ -291,7 +291,7 @@ const aboutus = () => {
                 Projects complete
               </Typography>
             </div>
-            <div className="count">
+            <div className="count my-7 lg:px-2">
               <Typography
                 component="h6"
                 variant="h4"
@@ -308,7 +308,7 @@ const aboutus = () => {
                 Team advisor
               </Typography>
             </div>
-            <div className="count">
+            <div className="count my-7 lg:px-2">
               <Typography
                 component="h6"
                 variant="h4"

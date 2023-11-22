@@ -18,7 +18,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import { FiFilter } from "react-icons/fi";
 import { PiShoppingCart } from "react-icons/pi";
@@ -27,15 +27,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { sliceProducts } from "../redux/products";
 import Layout from "../shared/userLayout";
+import { useRouter } from "next/navigation";
 
 const Products: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.value);
   const [priceRange, setPriceRange] = useState<number[]>([20, 30]);
 
-  setTimeout(() => {
-    dispatch(sliceProducts({ start: 0, end: 5 }));
-  }, 5000);
+  const router = useRouter();
+  const navigateTo = (path: string) => {
+    console.log(path);
+
+    router.push(path);
+  };
+  
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      dispatch(sliceProducts({ start: 0, end: 5 }));
+    }, 5000);
+
+    return () => {
+      timer;
+    };
+  }, []);
 
   // const generateMarks = (min: number, max: number) => {
   //   const marks = [];
@@ -50,154 +64,179 @@ const Products: React.FC = () => {
   return (
     <Layout title="Products">
       <Grid container>
-        <Grid item sm={8}>
-          <Grid container spacing={2} className="p-5">
+        <Grid item sm={12} xs={12} lg={9}>
+          <Grid container className="p-5 ">
             <Grid
-              item
-              xs={12}
-              className="filters flex justify-between px-5 items-center "
+              container
+              className="filters flex-wrap flex justify-between items-center "
             >
-              <Button
-                variant="contained"
-                className="rounded-full hover:bg-primary mx-1 hover:text-white text-gray-800 h-10 "
+              <Grid item xs={12} sm={6} md={4} lg={3} className="filters flex justify-between px-5 items-center mt-5">
+                <Button
+                  variant="contained"
+                  className="rounded-full w-full hover:bg-primary mx-1 hover:text-white text-gray-800 h-10 "
+                >
+                  <FiFilter className="mr-1" />
+                  Filter
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={6} className="filters flex justify-between lg:justify-end px-5 items-center mt-5 ">
+                <Typography
+                  variant="subtitle2"
+                  className="text-gray-400 full mt-5 lg:mt-0 lg:text-end   w-full text-center"
+                >
+                  Showing 1–12 of 16 results
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={3} className="filters flex justify-between px-5 items-center mt-5 lg:mt-0">
+                <Autocomplete
+                  limitTags={2}
+                  color="primary"
+                  options={[
+                    { name: "Price : Low to High", value: 25 },
+                    { name: "Price : High to Low", value: 25 },
+                    { name: "Rating : Low to High", value: 25 },
+                    { name: "Rating : High to Low", value: 25 },
+                    { name: "Latest", value: 25 },
+                    { name: "Rating", value: 25 },
+                  ]}
+                  size="small"
+                  getOptionLabel={(option) => option.name}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Default Sorting"
+                      placeholder="Sort By"
+                    />
+                  )}
+                  sx={{ width: "200px" }}
+                  className=" mt-5 w-full mx-1 "
+                  id="sort"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12} sm={6} md={4} lg={3}
+                className="filters flex justify-between px-5 items-center mt-5 "
               >
-                <FiFilter className="mr-1" />
-                Filter
-              </Button>
+                <Autocomplete
+                  multiple
+                  limitTags={2}
+                  options={[
+                    { name: "Yash", age: 25 },
+                    { name: "John", age: 30 },
+                    { name: "Alice", age: 28 },
+                    { name: "Bob", age: 22 },
+                    { name: "Eva", age: 35 },
+                    { name: "David", age: 27 },
+                    { name: "Grace", age: 31 },
+                    { name: "Tom", age: 26 },
+                    { name: "Sophie", age: 29 },
+                    { name: "Michael", age: 32 },
+                  ]}
+                  size="small"
+                  getOptionLabel={(option) => option.name}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Categories"
+                      placeholder="Choose Categories"
+                    />
+                  )}
+                  sx={{ width: "200px" }}
+                  className="mx-1 w-full"
+                  id="filter1"
+                />
+              </Grid>
 
-              <Typography
-                variant="subtitle2"
-                className="text-gray-400 ml-auto mr-2"
+              <Grid
+                item
+                xs={12} sm={6} md={4} lg={3}
+                className="filters flex justify-between px-5 items-center mt-5 "
               >
-                Showing 1–12 of 16 results
-              </Typography>
-
-              <Autocomplete
-                limitTags={2}
-                color="primary"
-                options={[
-                  { name: "Price : Low to High", value: 25 },
-                  { name: "Price : High to Low", value: 25 },
-                  { name: "Rating : Low to High", value: 25 },
-                  { name: "Rating : High to Low", value: 25 },
-                  { name: "Latest", value: 25 },
-                  { name: "Rating", value: 25 },
-                ]}
-                size="small"
-                getOptionLabel={(option) => option.name}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Default Sorting"
-                    placeholder="Sort By"
-                  />
-                )}
-                sx={{ width: "200px" }}
-                className="mx-1"
-                id="sort"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              className="filters flex justify-between px-5 items-center "
-            >
-              <Autocomplete
-                multiple
-                limitTags={2}
-                options={[
-                  { name: "Yash", age: 25 },
-                  { name: "John", age: 30 },
-                  { name: "Alice", age: 28 },
-                  { name: "Bob", age: 22 },
-                  { name: "Eva", age: 35 },
-                  { name: "David", age: 27 },
-                  { name: "Grace", age: 31 },
-                  { name: "Tom", age: 26 },
-                  { name: "Sophie", age: 29 },
-                  { name: "Michael", age: 32 },
-                ]}
-                size="small"
-                getOptionLabel={(option) => option.name}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Categories"
-                    placeholder="Choose Categories"
-                  />
-                )}
-                sx={{ width: "200px" }}
-                className="mx-1"
-                id="filter1"
-              />
-              <Autocomplete
-                multiple
-                limitTags={2}
-                options={[
-                  { name: "Yash", age: 25 },
-                  { name: "John", age: 30 },
-                  { name: "Alice", age: 28 },
-                  { name: "Bob", age: 22 },
-                  { name: "Eva", age: 35 },
-                  { name: "David", age: 27 },
-                  { name: "Grace", age: 31 },
-                  { name: "Tom", age: 26 },
-                  { name: "Sophie", age: 29 },
-                  { name: "Michael", age: 32 },
-                ]}
-                size="small"
-                id="filter2"
-                getOptionLabel={(option) => option.name}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Categories"
-                    placeholder="Choose Categories"
-                  />
-                )}
-                sx={{ borderRadius: "9999px", width: "200px" }}
-                className="mx-1"
-              />
-              <Autocomplete
-                multiple
-                limitTags={2}
-                options={[
-                  { name: "Yash", age: 25 },
-                  { name: "John", age: 30 },
-                  { name: "Alice", age: 28 },
-                  { name: "Bob", age: 22 },
-                  { name: "Eva", age: 35 },
-                  { name: "David", age: 27 },
-                  { name: "Grace", age: 31 },
-                  { name: "Tom", age: 26 },
-                  { name: "Sophie", age: 29 },
-                  { name: "Michael", age: 32 },
-                ]}
-                id="filter3"
-                size="small"
-                getOptionLabel={(option) => option.name}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Categories"
-                    placeholder="Choose Categories"
-                  />
-                )}
-                sx={{ borderRadius: "9999px", width: "200px" }}
-                className="mx-1"
-              />
-              <Button
-                variant="contained"
-                className="rounded-full bg-primary text-white hover:bg-dark  h-10 "
+                <Autocomplete
+                  multiple
+                  limitTags={2}
+                  options={[
+                    { name: "Yash", age: 25 },
+                    { name: "John", age: 30 },
+                    { name: "Alice", age: 28 },
+                    { name: "Bob", age: 22 },
+                    { name: "Eva", age: 35 },
+                    { name: "David", age: 27 },
+                    { name: "Grace", age: 31 },
+                    { name: "Tom", age: 26 },
+                    { name: "Sophie", age: 29 },
+                    { name: "Michael", age: 32 },
+                  ]}
+                  size="small"
+                  id="filter2"
+                  getOptionLabel={(option) => option.name}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Categories"
+                      placeholder="Choose Categories"
+                    />
+                  )}
+                  sx={{ borderRadius: "9999px", width: "200px" }}
+                  className="mx-1 w-full"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12} sm={6} md={4} lg={3}
+                className="filters flex justify-between px-5 items-center mt-5 "
               >
-                Reset Filters{" "}
-              </Button>
+                <Autocomplete
+                  multiple
+                  limitTags={2}
+                  options={[
+                    { name: "Yash", age: 25 },
+                    { name: "John", age: 30 },
+                    { name: "Alice", age: 28 },
+                    { name: "Bob", age: 22 },
+                    { name: "Eva", age: 35 },
+                    { name: "David", age: 27 },
+                    { name: "Grace", age: 31 },
+                    { name: "Tom", age: 26 },
+                    { name: "Sophie", age: 29 },
+                    { name: "Michael", age: 32 },
+                  ]}
+                  id="filter3"
+                  size="small"
+                  getOptionLabel={(option) => option.name}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Categories"
+                      placeholder="Choose Categories"
+                    />
+                  )}
+                  sx={{ borderRadius: "9999px", width: "200px" }}
+                  className="mx-1 w-full"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12} sm={6} md={4} lg={3}
+                className="filters flex justify-between px-5 items-center mt-5 "
+              >
+                <Button
+                  variant="contained"
+                  className="rounded-full bg-primary text-white hover:bg-dark  h-10 w-full "
+                >
+                  Reset Filters{" "}
+                </Button>
+              </Grid>
             </Grid>
 
             {products.slice(0, 10).map((category, index) => {
               return (
-                <Grid item xs={3} key={index}>
-                  <Card className="border-[1px] shadow-none relative card hover:border-primary hover:shadow-box_shadow_3_hover rounded-2xl py-6 card">
+                <Grid item xs={12} sm={6} md={4} key={index} >
+                  <Card
+                    className="border-[1px] shadow-none sm:mx-auto relative sm:w-[280px] w-[300px] m-auto card hover:border-primary hover:shadow-box_shadow_3_hover rounded-2xl py-6 card my-2"
+                    onClick={() => navigateTo("products/1")}
+                  >
                     <CardContent className="flex flex-col items-start">
                       <div className="onImgContent flex justify-center w-full relative ">
                         <img
@@ -205,12 +244,12 @@ const Products: React.FC = () => {
                           className="object-contain h-40 m-auto hover:scale-[1.05] "
                           alt=""
                         />
-                        <div className="border-[1px] rounded-md options  top-1/2 border-primary justify-center overflow-hidden flex text-2xl min-w-[84px] w-1/2  items-center bg-white text-primary absolute h-8">
+                        <div className="border-[1px] rounded-md options  top-1/2 border-primary justify-center flex text-2xl min-w-[84px] w-1/2  items-center bg-white text-primary absolute h-8">
                           <Tooltip
                             title="View"
                             placement="top"
                             arrow
-                            className=" duration-500"
+                            className=" duration-500 w-1/2"
                           >
                             <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary ">
                               <AiOutlineEye />
@@ -221,7 +260,7 @@ const Products: React.FC = () => {
                             title="Wishlist"
                             placement="top"
                             arrow
-                            className=" duration-500 "
+                            className=" duration-500 w-1/2 "
                           >
                             <IconButton className="justify-center items-center text-primary h-full  hover:text-secondary">
                               <AiOutlineHeart />
@@ -240,7 +279,7 @@ const Products: React.FC = () => {
                         value={5}
                         size="small"
                         className=" mt-3"
-                        id={`prductrating${index}`}
+                        id={`Rating${index}`}
                       />
                       <span className="text-text mt-2 text-md">
                         By <span className="text-primary"> Yash Choudhary</span>
@@ -254,7 +293,7 @@ const Products: React.FC = () => {
                             $23.50
                           </del>
                         </div>
-                        <button className="bg-background_3  p-2 duration-500 flex items-center text-primary text-md font-semibold active:shadow-none hover:shadow-2xl hover:-translate-y-1 transition rounded-md ">
+                        <button className="bg-background_3 p-2 duration-500 flex items-center text-primary text-md font-semibold active:shadow-none hover:shadow-2xl hover:-translate-y-1 transition rounded-md ">
                           <PiShoppingCart /> Add
                         </button>
                       </div>
@@ -268,7 +307,7 @@ const Products: React.FC = () => {
             })}
           </Grid>
         </Grid>
-        <Grid item sm={4} className="p-5 mt-24  ">
+        <Grid item sm={12} xs={12} lg={3} className="p-5 mt-24  ">
           <Card
             variant="outlined"
             className="border-[1px] rounded-2xl relative shadow-box_shadow_3 my-5"

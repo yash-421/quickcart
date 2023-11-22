@@ -8,9 +8,16 @@ import {
 import {FaLongArrowAltLeft, FaLongArrowAltRight} from 'react-icons/fa'
 import { PiShoppingCart } from "react-icons/pi";
 import { Card, CardContent, Tooltip, IconButton, Rating } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const SliderProductList = React.memo(
   ({ categories }: { categories: { name: string; image: string }[] }) => {
+    const router = useRouter();
+    const navigateTo = (path: string) => {
+      console.log(path);
+  
+      router.push(path);
+    };
     const [scrollLeftButtonVisible, setScrollLeftButtonVisible] =
       useState(false);
     const [scrollRightButtonVisible, setScrollRightButtonVisible] =
@@ -46,16 +53,17 @@ const SliderProductList = React.memo(
     };
 
     return (
-      <article className="p-6 relative mx-5 mt-10">
+      <article className=" relative mx-5  mt-10 ">
         <div
-          className={`flex overflow-auto   scroll-smooth w-full`}
+          className={`flex overflow-auto snap-x scroll-smooth w-full`}
           style={{
             transition: "transform 0.3s ease"
           }}
           ref={containerRef}
         >
           {categories.map((category, index) => (
-            <Card className="border-[1px] shadow-none min-w-[230px] mx-5 relative card hover:border-primary hover:shadow-box_shadow_3_hover rounded-2xl py-5 card" key={index} >
+            <Card className="border-[1px] snap-start shadow-none min-w-[230px] mx-5 relative card hover:border-primary hover:shadow-box_shadow_3_hover rounded-2xl py-5 card" key={index}             onClick={()=>navigateTo('products/1')}
+            >
               <CardContent className="flex flex-col items-start">
                 <div className="onImgContent flex justify-center w-full relative ">
                   <img
@@ -121,7 +129,7 @@ const SliderProductList = React.memo(
         </div>
 
         <button
-          className={`bg-slate-50 cursor-pointer hover:bg-primary hover:text-white text-slate-400 transition-colors shadow-lg  p-2 rounded-full mt-8 absolute -top-10 -translate-y-1/2  -translate-x-1/2 active:shadow-none`}
+          className={`bg-slate-50 cursor-pointer hover:bg-primary hover:text-white text-slate-400 transition-colors shadow-lg  p-2 rounded-full mt-8 absolute -top-14 -translate-y-1/2  -translate-x-1/2 active:shadow-none`}
           disabled={!scrollLeftButtonVisible}
           onClick={scrollLeft}
         >
@@ -129,7 +137,7 @@ const SliderProductList = React.memo(
 
         </button>
         <button
-          className={`bg-slate-50 cursor-pointer hover:bg-primary  hover:text-white text-slate-400 transition-colors shadow-lg   p-2 rounded-full mt-8 absolute -top-10 left-20 -translate-y-1/2 -translate-x-1/2  active:shadow-none`}
+          className={`bg-slate-50 cursor-pointer hover:bg-primary  hover:text-white text-slate-400 transition-colors shadow-lg   p-2 rounded-full mt-8 absolute -top-14 left-20 -translate-y-1/2 -translate-x-1/2  active:shadow-none`}
           disabled={!scrollRightButtonVisible}
           onClick={scrollRight}
         >

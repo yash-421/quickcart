@@ -79,7 +79,7 @@ const page = () => {
   return (
     <Layout title="Product Details">
       <Grid container className="px-5">
-        <Grid xs={4} item className="px-5">
+        <Grid xs={12} md={6} item className="px-5">
           <Card className="flex flex-col items-center justify-center border-[1px] rounded-xl border-primary">
             <CardMedia
               image={allImages[activeImage]}
@@ -88,11 +88,11 @@ const page = () => {
           </Card>
           <div className="allimages-container relative">
             <div
-              className="allImages flex overflow-scroll mt-5  px-5 scroll-smooth "
+              className="allImages flex overflow-scroll mt-5 snap-center  px-5 scroll-smooth "
               ref={productImages}
             >
               {allImages.map((image, index) => (
-                <div className="img-container min-w-[30%]" key={index}>
+                <div className="img-container min-w-[30%] mx-1" key={index}>
                   <img
                     src={image}
                     alt=""
@@ -103,39 +103,39 @@ const page = () => {
               ))}
               <Button
                 onClick={handleScrollBack}
-                className="absolute top-[40%] left-0 py-2 border-2 border-gray-950 min-w-0 rounded-full bg-primary shadow-box_shadow_2 text-2xl -translate-y-1/2  text-white"
+                className="absolute top-[45%] left-0 py-2 border-2 border-gray-950 min-w-0 rounded-full bg-primary shadow-box_shadow_2 text-2xl -translate-y-1/2  text-white"
               >
                 <IoIosArrowBack />
               </Button>
               <Button
                 onClick={handleScrollNext}
-                className="absolute top-[40%] -right-5  py-2 border-2 border-gray-950 min-w-0 rounded-full bg-primary shadow-box_shadow_2 text-2xl -translate-y-1/2  text-white"
+                className="absolute top-[45%] -right-5  py-2 border-2 border-gray-950 min-w-0 rounded-full bg-primary shadow-box_shadow_2 text-2xl -translate-y-1/2  text-white"
               >
                 <IoIosArrowForward />
               </Button>
             </div>
           </div>
         </Grid>
-        <Grid xs={5} className="flex flex-col justify-start  px-5 ">
+        <Grid item xs={12} md={6} className="flex flex-col justify-start  px-5 ">
           <Chip
             label="Sale !"
-            className=" rounded-lg bg-color_1 text-primary self-start mb-3 "
+            className=" my-5 rounded-lg bg-color_1 text-primary self-start mb-3 "
           />
-          <Typography variant="h5" component="h1">
+          <Typography variant="h5" component="h1" className=" text-lg">
             {" "}
             Canada Dry Ginger Ale – 2 L Bottle{" "}
           </Typography>
           <div className="price">
             <Typography
               variant="subtitle2"
-              className="text-primary opacity-50"
+              className="text-primary opacity-50 text-base"
               component="del"
             >
               $100.50
             </Typography>
             <Typography
               variant="subtitle1"
-              className="text-primary ml-1 underline"
+              className="text-primary ml-1 underline text-md"
               component="span"
             >
               $100.50
@@ -166,7 +166,7 @@ const page = () => {
             <Button
               variant="contained"
               size="medium"
-              className="min-w-0 p-4 text-xl text-white font-semibold mx-2 rounded-full"
+              className="min-w-0 rounded-full p-5 "
             >
               <LuMinusCircle />
             </Button>
@@ -175,26 +175,26 @@ const page = () => {
               value={2}
               variant="outlined"
               type="number"
-              sx={{ width: 55, borderRadius: 9999, textAlign: "center" }}
-              inputProps={{ style: { textAlign: "center" } }}
+              className="w-1/4 px-3 text-white font-semibold rounded-full"
+              inputProps={{ className: "w-full h-full text-center" }}
             />
 
             <Button
               variant="contained"
               size="medium"
-              className="min-w-0 p-4 text-xl text-white font-semibold mx-2 rounded-full"
+              className="min-w-0 rounded-full p-5 "
             >
               <LuPlusCircle />
             </Button>
             <Button
               variant="contained"
               color="secondary"
-              className="p-3 ml-4 bg-primary hover:bg-secondary text-white rounded-lg"
+              className="w-1/4 p-2 sm:p-3 ml-4 bg-primary hover:bg-secondary text-white rounded-lg"
             >
-              {" "}
               Add To Cart
             </Button>
           </div>
+
           <Grid container rowSpacing={1} className="mt-5">
             <Grid item xs={6}>
               <Typography
@@ -310,10 +310,10 @@ const page = () => {
             className="rounded-lg my-5"
           />
         </Grid>
-        <Grid xs={3} className="px-5">
+        <Grid xs={12} md={6} item className="px-5 md:order-9">
           <div className="img-container relative mb-5">
             <img src="/banner-11-min.png" className="rounded-xl" alt="" />
-            <div className="text absolute top-20 w-36 left-5">
+            <div className="text absolute top-20 w-36 left-5 sm:w-3/4 sm:top-[50%] sm:-translate-y-1/2">
               <Typography
                 variant="subtitle1"
                 className=" text-gray-400"
@@ -324,7 +324,7 @@ const page = () => {
               <Typography
                 variant="h5"
                 component="h4"
-                className="font-medium hover:-translate-y-[5px] transition "
+                className="font-medium hover:-translate-y-[5px] transition md:text-2xl "
               >
                 Save 17% on <span className="text-primary">Oganic </span>
                 Juice
@@ -386,7 +386,7 @@ const page = () => {
                           className="rounded-none"
                         />
                       </ListItemAvatar>
-                      <ListItemText className="ml-2">
+                      <ListItemText className="ml-2 text-lg">
                         {product.name}
                       </ListItemText>
                       <Button variant="text" className="ml-auto">
@@ -399,13 +399,13 @@ const page = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={9} className="-mt-64">
+        <Grid item xs={12} md={6} className=" my-5">
           <Card className="rounded-xl">
             <CardContent>
-              <Box className="flex justify-start">
+              <Box className="flex justify-start flex-wrap">
                 <Button
                   variant="outlined"
-                  className=" rounded-2xl mx-5 "
+                  className=" rounded-2xl mx-5 w-full my-2 "
                   onClick={() => setCollapse(true)}
                 >
                   Description
@@ -413,14 +413,14 @@ const page = () => {
 
                 <Button
                   variant="outlined"
-                  className=" rounded-2xl mx-5 "
+                  className=" rounded-2xl mx-5 w-full my-2 "
                   onClick={() => setCollapse(true)}
                 >
                   Additional information
                 </Button>
                 <Button
                   variant="outlined"
-                  className=" rounded-2xl mx-5 "
+                  className=" rounded-2xl mx-5 w-full my-2"
                   onClick={() => setCollapse(true)}
                 >
                   Reviews (0)
@@ -557,7 +557,7 @@ const page = () => {
                       component="p"
                       className="my-8 text-gray-800 font-medium "
                     >
-                     Suggested Use
+                      Suggested Use
                     </Typography>
 
                     <Typography

@@ -8,6 +8,7 @@ import {
   CardContent,
   CardMedia,
   Chip,
+  Collapse,
   Divider,
   Drawer,
   Grid,
@@ -40,6 +41,7 @@ import { IoMdArrowDropdown, IoMdCall } from "react-icons/io";
 import { deepOrange } from "@mui/material/colors";
 import { FaAngleDoubleRight, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaMapLocation, FaSquareXTwitter } from "react-icons/fa6";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 const Layout = ({
   children,
   title,
@@ -54,7 +56,11 @@ const Layout = ({
   const gridItems: { icon: string; title: string; description: string }[] =
     useSelector((state: RootState) => state.gridItems.value);
 
-  console.log(gridItems);
+    const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -168,37 +174,93 @@ const Layout = ({
                 anchor="left"
                 open={sidebar}
                 onClose={() => setSidebar(false)}
+                className=" items-center"
               >
                 <Box
                   sx={{
                     width: 250,
                   }}
+                  className="py-5 flex flex-col items-center "
                   role="presentation"
                 >
+                  <Avatar
+                    sx={{ bgcolor: deepOrange[500] }}
+                    className=" p-5 w-10 h-10"
+                  >
+                    Y
+                  </Avatar>
+                  <Typography
+                    component="h1"
+                    variant="subtitle2"
+                    className="mt-5"
+                  >
+                    Yash Choudhary
+                  </Typography>
+
+                  <Divider
+                    variant="fullWidth"
+                    orientation="horizontal"
+                    className="w-full my-5"
+                  />
                   <List
                     sx={{
                       width: "100%",
                       maxWidth: 360,
                       bgcolor: "background.paper",
-                      position: "relative",
-                      overflow: "auto",
-                      maxHeight: 300,
-                      "& ul": { padding: 0 },
                     }}
-                    subheader={<li />}
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
                   >
-                    {[0, 1, 2, 3, 4].map((sectionId) => (
-                      <li key={`section-${sectionId}`}>
-                        <ul>
-                          <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-                          {[0, 1, 2].map((item) => (
-                            <ListItem key={`item-${sectionId}-${item}`}>
-                              <ListItemText primary={`Item ${item}`} />
-                            </ListItem>
-                          ))}
-                        </ul>
-                      </li>
-                    ))}
+                    <ListItemButton onClick={handleClick}>
+                
+                    <ListItemText primary="Category" />
+                      {open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        <ListItemButton sx={{ pl: 4 }}>
+                    
+                          <ListItemText primary="All" />
+                        </ListItemButton>
+                        <ListItemButton sx={{ pl: 4 }}>
+                    
+                          <ListItemText primary="Dairy" />
+                        </ListItemButton>
+                        <ListItemButton sx={{ pl: 4 }}>
+                    
+                          <ListItemText primary="Cold Drinks" />
+                        </ListItemButton>
+                        <ListItemButton sx={{ pl: 4 }}>
+                    
+                          <ListItemText primary="Snack" />
+                        </ListItemButton>
+                      </List>
+                    </Collapse>
+                    <ListItemButton>
+                      <ListItemText>
+                        Contact Us
+                      </ListItemText>
+                    </ListItemButton>
+                    <ListItemButton>
+                      <ListItemText>
+                        About Us
+                      </ListItemText>
+                    </ListItemButton>
+                    <ListItemButton>
+                      <ListItemText>
+                        Refund Policy
+                      </ListItemText>
+                    </ListItemButton>
+                    <ListItemButton>
+                      <ListItemText>
+                        Privacy Policy
+                      </ListItemText>
+                    </ListItemButton>
+                    <ListItemButton>
+                      <ListItemText>
+                        Term & Condition
+                      </ListItemText>
+                    </ListItemButton>
                   </List>
                   <Divider />
                 </Box>
@@ -233,12 +295,12 @@ const Layout = ({
                 sx={{ my: 2, color: "white", display: "block" }}
                 className="mx-5 relative group flex"
               >
-                Products <IoMdArrowDropdown />
+                Category <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
                   <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
-                        primary="Trash"
+                        primary="All"
                         primaryTypographyProps={{
                           fontSize: 14,
                           fontWeight: 500,
@@ -249,7 +311,29 @@ const Layout = ({
                   <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
-                        primary="Spam"
+                        primary="Dairy"
+                        primaryTypographyProps={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
+                      <ListItemText
+                        primary="Cold Drinks"
+                        primaryTypographyProps={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
+                      <ListItemText
+                        primary="Snack"
                         primaryTypographyProps={{
                           fontSize: 14,
                           fontWeight: 500,
@@ -263,72 +347,24 @@ const Layout = ({
                 sx={{ my: 2, color: "white", display: "block" }}
                 className="mx-5 relative group flex"
               >
-                Products <IoMdArrowDropdown />
-                <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
-                    <ListItemButton className="m-0 py-1 ">
-                      <ListItemText
-                        primary="Trash"
-                        primaryTypographyProps={{
-                          fontSize: 14,
-                          fontWeight: 500,
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
-                    <ListItemButton className="m-0 py-1 ">
-                      <ListItemText
-                        primary="Spam"
-                        primaryTypographyProps={{
-                          fontSize: 14,
-                          fontWeight: 500,
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
+                Contact
               </Button>
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 className="mx-5 relative group flex"
               >
-                Products <IoMdArrowDropdown />
-                <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
-                    <ListItemButton className="m-0 py-1 ">
-                      <ListItemText
-                        primary="Trash"
-                        primaryTypographyProps={{
-                          fontSize: 14,
-                          fontWeight: 500,
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
-                    <ListItemButton className="m-0 py-1 ">
-                      <ListItemText
-                        primary="Spam"
-                        primaryTypographyProps={{
-                          fontSize: 14,
-                          fontWeight: 500,
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
+                About Us
               </Button>
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 className="mx-5 relative group flex"
               >
-                Products <IoMdArrowDropdown />
+                Help <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
                   <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
-                        primary="Trash"
+                        primary="Refund Policy"
                         primaryTypographyProps={{
                           fontSize: 14,
                           fontWeight: 500,
@@ -339,7 +375,18 @@ const Layout = ({
                   <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
-                        primary="Spam"
+                        primary="Privacy Policy"
+                        primaryTypographyProps={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                    <ListItemButton className="m-0 py-1 ">
+                      <ListItemText
+                        primary="Term & Condition"
                         primaryTypographyProps={{
                           fontSize: 14,
                           fontWeight: 500,
@@ -349,6 +396,7 @@ const Layout = ({
                   </ListItem>
                 </List>
               </Button>
+
               <Search className="mx-3 self-center ml-auto ">
                 <SearchIconWrapper>
                   <FcSearch />
@@ -394,59 +442,75 @@ const Layout = ({
           <Grid
             item
             xs={12}
-            className="banner-img10 p-20 min-h-[480px] relative mx-5 rounded-xl "
+            className=" w-full banner-img10 p-5 md:px-10 relative mx-5 rounded-xl "
           >
-            <h1 className="text-6xl w-4/5 leading-tight font-[700] mb-5">
+            <img
+              src="/banner-9-min.png"
+              className=" hidden sm:block sm:h-5/6 sm:absolute bottom-0 -right-2"
+              alt=""
+            />
+            <h1 className=" mb:text-center md:text-2xl   text-base mt-5 leading-tight font-[700] mb-5 sm:w-3/4">
               {" "}
               Stay home & get your daily needs from our shop
             </h1>
-            <span className="text-gray-400 mt-5 text-xl">
+            <span className="text-gray-400 mt-5 text-sm md:text-xl">
               Start Your Daily Shopping with{" "}
               <span className="text-primary"> Nest Mart</span>
             </span>
-            <div className="email mt-16 flex  bg-white w-[400px] rounded-full overflow-hidden ">
+            <div className="email mt-16 flex flex-col md:relative md:w-full w-full rounded-full items-center sm:items-start ">
               <input
                 type="email"
                 name="subscriptionemail"
                 id="subscriptionemail"
-                className="w-[290px] outline-none px-3 text-primary h-[60px]"
+                className="outline-none md:h-12 h-10 px-2 md:rounded-full md:w-[300px]  rounded-lg bg-white text-primary text-base "
                 placeholder="Your Email Address"
               />
-              <button className="bg-primary h-[60px] w-[110px] hover:bg-dark cursor-pointer z-10 font-semibold text-white rounded-full">
+              <button className="bg-primary md:h-12 mt-5 md:absolute md:top-0 md:left-[250px] md:mt-0 md  min-w-0 p-2 hover:bg-dark cursor-pointer z-10 font-semibold text-white rounded-full">
                 Subscribe
               </button>
             </div>
-            <img
-              src="/banner-9-min.png"
-              className="absolute right-10 bottom-0 h-auto w-3/4 "
-              alt=""
-            />
           </Grid>
-          {gridItems.slice(0, 5).map((item, index) => (
-            <Grid
-              item
-              sm={2.2}
-              key={index}
-              className="m-auto bg-background_3 flex flex-col p-4 items-center rounded-xl justify-around my-5 hover:shadow-lg transition duration-300"
-              style={{ height: "200px", width: "150px" }} // Set fixed height and width here
-            >
-              <div className="banner-icon p-5 ">
-                <img
-                  src={item.icon}
-                  className="min-w-[60px] min-h-[50px] h-[50px] transform transition duration-300 hover:scale-110"
-                  alt=""
-                />
-              </div>
-              <div className="details flex flex-col items-center">
-                <span className="text-lg font-semibold">{item.title}</span>
-                <span className="text-gray-400 text-center">
-                  {item.description}
-                </span>
-              </div>
+          <Grid xs={12} item>
+            <Grid container>
+              {gridItems.map((item, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={2}
+                  key={index}
+                  className=" px-5 "
+                >
+                  <Box className="lg:h-[260px]  m-auto bg-background_3 flex flex-col p-4 items-center rounded-xl justify-around my-5 hover:shadow-lg transition duration-300">
+                    <div className="banner-icon p-5 ">
+                      <img
+                        src={item.icon}
+                        className="min-w-[60px] min-h-[50px] h-[50px] transform transition duration-300 hover:scale-110"
+                        alt=""
+                      />
+                    </div>
+                    <div className="details flex flex-col items-center">
+                      <span className="text-lg font-semibold">
+                        {item.title}
+                      </span>
+                      <span className="text-gray-400 text-center lg:text-start">
+                        {item.description}
+                      </span>
+                    </div>
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
-          ))}
+          </Grid>
 
-          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            lg={3}
+            className=" bg-background_3 py-5 pl-5 "
+          >
             <Card className="shadow-none flex items-center bg-background_3 flex-col h-full justify-center">
               <img
                 src="/logo.png"
@@ -475,22 +539,28 @@ const Layout = ({
               </CardActions>
             </Card>
           </Grid>
-          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            lg={3}
+            className=" bg-background_3 px-5 py-5 pl-5 "
+          >
             <Typography variant="h6" mb={0.2}>
               Explore
             </Typography>
             <List>
-              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <ListItem className="py-1 cursor-pointer ">
                 <Typography
                   component="a"
                   variant="subtitle1"
-                  className="flex items-center hover:ml-1 transition-all "
+                  className="flex items-center hover:ml-1 transition-all  "
                   href="/aboutus"
                 >
                   <FaAngleDoubleRight className="text-primary mr-1" /> About Us{" "}
                 </Typography>
               </ListItem>
-              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <ListItem className="py-1 cursor-pointer ">
                 <Typography
                   component="a"
                   variant="subtitle1"
@@ -501,7 +571,7 @@ const Layout = ({
                   Us{" "}
                 </Typography>
               </ListItem>
-              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <ListItem className="py-1 cursor-pointer ">
                 <Typography
                   component="a"
                   variant="subtitle1"
@@ -513,12 +583,18 @@ const Layout = ({
               </ListItem>
             </List>
           </Grid>
-          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            lg={3}
+            className=" bg-background_3 py-5 pl-5 "
+          >
             <Typography variant="h6" mb={0.2}>
               Help & Support
             </Typography>
             <List>
-              <ListItem className="pl-0 py-1 cursor-pointer">
+              <ListItem className="py-1 cursor-pointer">
                 <Typography
                   component="a"
                   variant="subtitle1"
@@ -529,7 +605,7 @@ const Layout = ({
                   Policy{" "}
                 </Typography>
               </ListItem>
-              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <ListItem className="py-1 cursor-pointer ">
                 <Typography
                   component="a"
                   variant="subtitle1"
@@ -540,7 +616,7 @@ const Layout = ({
                   Policy{" "}
                 </Typography>
               </ListItem>
-              <ListItem className="pl-0 py-1 cursor-pointer ">
+              <ListItem className="py-1 cursor-pointer ">
                 <Typography
                   component="a"
                   variant="subtitle1"
@@ -553,12 +629,18 @@ const Layout = ({
               </ListItem>
             </List>
           </Grid>
-          <Grid item xs={3} className=" bg-background_3 pt-24 pb-12 ">
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            lg={3}
+            className=" bg-background_3 py-5 pl-5 "
+          >
             <Typography variant="h6" mb={0.2}>
               Contact Details
             </Typography>
             <List>
-              <ListItem className="pl-0 py-1 cursor-pointer  ">
+              <ListItem className="py-1 cursor-pointer  ">
                 <a
                   className=" hover:ml-1  transition-all flex items-center "
                   href="tel:1234567890"
@@ -567,7 +649,7 @@ const Layout = ({
                   <IoMdCall className="text-primary mr-1" /> 1234567890
                 </a>
               </ListItem>
-              <ListItem className="pl-0 py-1 cursor-pointer  ">
+              <ListItem className="py-1 cursor-pointer  ">
                 <a
                   className=" hover:ml-1  transition-all flex items-center "
                   href="mailto:johndoe@gmail.com"
@@ -575,7 +657,7 @@ const Layout = ({
                   <MdEmail className="text-primary mr-1" /> johndoe@gmail.com
                 </a>
               </ListItem>
-              <ListItem className="pl-0 py-1 cursor-pointer  ">
+              <ListItem className="py-1 cursor-pointer  ">
                 <a
                   className=" hover:ml-1  transition-all flex items-center "
                   href="https://maps.app.goo.gl/RvipSLK3zCmStNWy5"
@@ -591,6 +673,7 @@ const Layout = ({
           <Grid
             item
             xs={12}
+            sm={12}
             className=" bg-background_3 mt-0 border-t-2 border-t-primary py-2 "
           >
             <Typography variant="subtitle1" mb={0.2} className=" text-center ">

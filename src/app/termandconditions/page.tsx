@@ -12,14 +12,21 @@ import React from "react";
 import Layout from "../shared/userLayout";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { useRouter } from "next/navigation";
 
 const TermsAndConditions = () => {
   const categories = useSelector((state: RootState) => state.products.value);
+  const router = useRouter();
+  const navigateTo = (path: string) => {
+    console.log(path);
+
+    router.push(path);
+  };
 
   return (
     <Layout title="Terms and Conditions">
       <Grid container className="px-10" rowGap={5}>
-        <Grid item xs={8} className="my-5 mt-20 px-5">
+        <Grid item xs={12} lg={8} className="my-5 mt-20 px-5">
           <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
             Terms and Conditions
           </Typography>
@@ -165,220 +172,208 @@ const TermsAndConditions = () => {
             conditions.
           </Typography>
         </Grid>
-        <Grid item xs={4} className="my-5 ">
+        <Grid item xs={12} lg={4} className="my-5 ">
           <Grid container className="p-5">
-            <Grid
-              item
-              xs={12}
-              className="px-5 font-semibold border-[1px] border-gray-300 my-5 hover:shadow-xl rounded-xl p-5"
+            <Grid item xs={12} sm={6} lg={12} className="px-5 font-semibold">
+          <h1 className="text-2xl mb-4">Top Selling</h1>
+          <hr className="label-line mb-5" />
+          {categories.slice(0, 3).map((item, index) => (
+            <Card
+              key={index}
+              className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+              onClick={() => navigateTo("products/1")}
             >
-              <h1 className="text-2xl mb-4">Top Selling</h1>
-              <hr className="label-line mb-5" />
-              {categories.slice(0, 3).map((item, index) => (
-                <Card
-                  key={index}
-                  className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition  "
-                >
-                  <CardContent className="flex">
-                    <CardMedia
-                      component="img"
-                      height="100"
-                      width="100"
-                      image={item.image}
-                      alt={item.name}
-                      className="h-[100px] w-[100px]"
-                    />
-                    <div className="details ml-3">
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        className="mb-2 text-md"
-                      >
-                        {item.name}
-                      </Typography>
-                      <div className="flex items-center">
-                        <Rating value={5} size="small" readOnly />
-                        <Typography
-                          variant="body2"
-                          component="span"
-                          className="ml-1 text-gray-400"
-                          id={`rate${index}`}
-                        >
-                          5
-                        </Typography>
-                      </div>
-                      <div className="price mt-1">
-                        <span className="underline text-primary font-semibold">
-                          ₹ 22.50
-                        </span>
-                        <del className="text-gray-300 text-xs ml-1">$23.50</del>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              className="px-5 font-semibold border-[1px] border-gray-300 my-5 hover:shadow-xl rounded-xl p-5"
+              <CardContent className="flex">
+                <CardMedia
+                  component="img"
+                  height="100"
+                  width="100"
+                  image={item.image}
+                  alt={item.name}
+                  className="h-[100px] w-[100px]"
+                />
+                <div className="details ml-3">
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    className="mb-2 text-md"
+                  >
+                    {item.name}
+                  </Typography>
+                  <div className="flex items-center">
+                    <Rating value={5} size="small" readOnly />
+                    <Typography
+                      variant="body2"
+                      component="span"
+                      className="ml-1 text-gray-400"
+                      id={`rate${index}`}
+                    >
+                      5
+                    </Typography>
+                  </div>
+                  <div className="price mt-1">
+                    <span className="underline text-primary font-semibold">
+                      ₹ 22.50
+                    </span>
+                    <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </Grid>
+        <Grid item xs={12} sm={6} lg={12} className="px-5 font-semibold">
+          <h1 className="text-2xl mb-4">Trending Products</h1>
+          <hr className="label-line mb-5" />
+          {categories.slice(0, 3).map((item, index) => (
+            <Card
+              key={index}
+              className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+              onClick={() => navigateTo("products/1")}
             >
-              <h1 className="text-2xl mb-4">Trending Products</h1>
-              <hr className="label-line mb-5" />
-              {categories.slice(0, 3).map((item, index) => (
-                <Card
-                  key={index}
-                  className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
-                >
-                  <CardContent className="flex">
-                    <CardMedia
-                      component="img"
-                      height="100"
-                      width="100"
-                      image={item.image}
-                      alt={item.name}
-                      className="h-[100px] w-[100px]"
-                    />
-                    <div className="details ml-3">
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        className="mb-2 text-md"
-                      >
-                        {item.name}
-                      </Typography>
-                      <div className="flex items-center">
-                        <Rating value={5} size="small" readOnly />
-                        <Typography
-                          variant="body2"
-                          component="span"
-                          className="ml-1 text-gray-400"
-                          id={`Start${index}`}
-                        >
-                          5
-                        </Typography>
-                      </div>
-                      <div className="price mt-1">
-                        <span className="underline text-primary font-semibold">
-                          ₹ 22.50
-                        </span>
-                        <del className="text-gray-300 text-xs ml-1">$23.50</del>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              className="px-5 font-semibold border-[1px] border-gray-300 my-5 hover:shadow-xl rounded-xl p-5"
+              <CardContent className="flex">
+                <CardMedia
+                  component="img"
+                  height="100"
+                  width="100"
+                  image={item.image}
+                  alt={item.name}
+                  className="h-[100px] w-[100px]"
+                />
+                <div className="details ml-3">
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    className="mb-2 text-md"
+                  >
+                    {item.name}
+                  </Typography>
+                  <div className="flex items-center">
+                    <Rating value={5} size="small" readOnly />
+                    <Typography
+                      variant="body2"
+                      component="span"
+                      className="ml-1 text-gray-400"
+                      id={`Start${index}`}
+                    >
+                      5
+                    </Typography>
+                  </div>
+                  <div className="price mt-1">
+                    <span className="underline text-primary font-semibold">
+                      ₹ 22.50
+                    </span>
+                    <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </Grid>
+        <Grid item xs={12} sm={6} lg={12} className="px-5 font-semibold">
+          <h1 className="text-2xl mb-4">Recently added</h1>
+          <hr className="label-line mb-5" />
+          {categories.slice(0, 3).map((item, index) => (
+            <Card
+              key={index}
+              className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+              onClick={() => navigateTo("products/1")}
             >
-              <h1 className="text-2xl mb-4">Recently added</h1>
-              <hr className="label-line mb-5" />
-              {categories.slice(0, 3).map((item, index) => (
-                <Card
-                  key={index}
-                  className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
-                >
-                  <CardContent className="flex">
-                    <CardMedia
-                      component="img"
-                      height="100"
-                      width="100"
-                      image={item.image}
-                      alt={item.name}
-                      className="h-[100px] w-[100px]"
+              <CardContent className="flex">
+                <CardMedia
+                  component="img"
+                  height="100"
+                  width="100"
+                  image={item.image}
+                  alt={item.name}
+                  className="h-[100px] w-[100px]"
+                />
+                <div className="details ml-3">
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    className="mb-2 text-md"
+                  >
+                    {item.name}
+                  </Typography>
+                  <div className="flex items-center">
+                    <Rating
+                      value={5}
+                      size="small"
+                      id={`ratingstar${index}`}
+                      readOnly
                     />
-                    <div className="details ml-3">
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        className="mb-2 text-md"
-                      >
-                        {item.name}
-                      </Typography>
-                      <div className="flex items-center">
-                        <Rating
-                          value={5}
-                          size="small"
-                          id={`ratingstar${index}`}
-                          readOnly
-                        />
-                        <Typography
-                          variant="body2"
-                          component="span"
-                          className="ml-1 text-gray-400"
-                        >
-                          5
-                        </Typography>
-                      </div>
-                      <div className="price mt-1">
-                        <span className="underline text-primary font-semibold">
-                          ₹ 22.50
-                        </span>
-                        <del className="text-gray-300 text-xs ml-1">$23.50</del>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              className="px-5 font-semibold border-[1px] border-gray-300 my-5 hover:shadow-xl rounded-xl p-5"
+                    <Typography
+                      variant="body2"
+                      component="span"
+                      className="ml-1 text-gray-400"
+                    >
+                      5
+                    </Typography>
+                  </div>
+                  <div className="price mt-1">
+                    <span className="underline text-primary font-semibold">
+                      ₹ 22.50
+                    </span>
+                    <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </Grid>
+        <Grid item xs={12} sm={6} lg={12} className="px-5 font-semibold">
+          <h1 className="text-2xl mb-4">Top Rated</h1>
+          <hr className="label-line mb-5" />
+          {categories.slice(0, 3).map((item, index) => (
+            <Card
+              key={index}
+              className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
+              onClick={() => navigateTo("products/1")}
             >
-              <h1 className="text-2xl mb-4">Top Rated</h1>
-              <hr className="label-line mb-5" />
-              {categories.slice(0, 3).map((item, index) => (
-                <Card
-                  key={index}
-                  className=" px-2 shadow-none hover:-translate-y-[5px] cursor-pointer transition "
-                >
-                  <CardContent className="flex">
-                    <CardMedia
-                      component="img"
-                      height="100"
-                      width="100"
-                      image={item.image}
-                      alt={item.name}
-                      className="h-[100px] w-[100px]"
+              <CardContent className="flex">
+                <CardMedia
+                  component="img"
+                  height="100"
+                  width="100"
+                  image={item.image}
+                  alt={item.name}
+                  className="h-[100px] w-[100px]"
+                />
+                <div className="details ml-3">
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    className="mb-2 text-md"
+                  >
+                    {item.name}
+                  </Typography>
+                  <div className="flex items-center">
+                    <Rating
+                      value={5}
+                      size="small"
+                      id={`allStart${index}`}
+                      readOnly
                     />
-                    <div className="details ml-3">
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        className="mb-2 text-md"
-                      >
-                        {item.name}
-                      </Typography>
-                      <div className="flex items-center">
-                        <Rating
-                          value={5}
-                          size="small"
-                          id={`allStart${index}`}
-                          readOnly
-                        />
-                        <Typography
-                          variant="body2"
-                          component="span"
-                          className="ml-1 text-gray-400"
-                        >
-                          5
-                        </Typography>
-                      </div>
-                      <div className="price mt-1">
-                        <span className="underline text-primary font-semibold">
-                          ₹ 22.50
-                        </span>
-                        <del className="text-gray-300 text-xs ml-1">$23.50</del>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </Grid>
+                    <Typography
+                      variant="body2"
+                      component="span"
+                      className="ml-1 text-gray-400"
+                    >
+                      5
+                    </Typography>
+                  </div>
+                  <div className="price mt-1">
+                    <span className="underline text-primary font-semibold">
+                      ₹ 22.50
+                    </span>
+                    <del className="text-gray-300 text-xs ml-1">$23.50</del>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </Grid>
           </Grid>
         </Grid>
       </Grid>
