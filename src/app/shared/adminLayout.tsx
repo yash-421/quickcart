@@ -34,7 +34,7 @@ const AdminLayout = ({
 
   
   const isSmScreen = useMediaQuery((theme: Theme) =>
-  theme.breakpoints.down("sm")
+  theme.breakpoints.down("lg")
 );
   useEffect(() => {
     setIsMobile(isSmScreen);
