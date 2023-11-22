@@ -34,6 +34,7 @@ const Admin = () => {
   const login = (values: FormikValues, { resetForm }: any) => {
     console.log(values);
     // setSubmitting(false);
+    
     resetForm();
     if (values) {
       router.push("admin/dashboard");

@@ -5,20 +5,20 @@ import {
   CssBaseline,
   Divider,
   Drawer,
-  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Theme,
   Toolbar,
   Typography,
-  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { IoIosLogOut } from "react-icons/io";
-import { IoMailUnreadOutline, IoMenu } from "react-icons/io5";
-import { MdDashboard, MdMoveToInbox, MdOutlineCategory } from "react-icons/md";
+import { IoMenu } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
 import { FaFolder, FaFolderOpen } from "react-icons/fa";
 
 const AdminLayout = ({
@@ -28,25 +28,18 @@ const AdminLayout = ({
   title: string;
   children: React.ReactNode;
 }) => {
-  const [open, setOpen] = useState(window.innerWidth >= 1024);
+  const [open, setOpen] = useState(false);
   const [drawerWidth, setDrawerWidth] = useState(290);
-  const [activePage, setActivePage] = useState("dashboard");
+  const [isMobile, setIsMobile] = useState(false);
 
+  
+  const isSmScreen = useMediaQuery((theme: Theme) =>
+  theme.breakpoints.down("sm")
+);
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 1024) {
-        setOpen(false);
-      } else {
-        setOpen(true);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [window.innerWidth]);
+    setIsMobile(isSmScreen);
+    setOpen(!isSmScreen);
+  }, [isSmScreen]);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -76,8 +69,6 @@ const AdminLayout = ({
       page: "subcategory",
     },
   ];
-
-  useEffect(() => {});
 
   const drawer = (
     <div className="mt-[85px]">
@@ -128,7 +119,7 @@ const AdminLayout = ({
         position="fixed"
         sx={{
           width: "100%",
-          height:'74px',
+          height: '74px',
           zIndex: 10555,
         }}
         className="flex flex-row items-center justify-between"
@@ -139,7 +130,7 @@ const AdminLayout = ({
             className="object-contain h-[60px] w-32 mix-blend-darken"
             alt=""
           />
-          {window.innerWidth < 1024 && (
+          {isMobile && (
             <Button
               size="small"
               className="text-3xl text-white"
@@ -148,7 +139,7 @@ const AdminLayout = ({
               <IoMenu />
             </Button>
           )}
-          {window.innerWidth >= 1024 && (
+          {!isMobile && (
             <Button
               size="small"
               className="text-3xl text-white"
@@ -171,12 +162,11 @@ const AdminLayout = ({
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
         className={`${
-          window.innerWidth < 1024 ? "hidden" : "block"
+          isMobile ? "hidden" : "block"
         } transition-all duration-500 ease-linear`}
-        
       >
         <Drawer
-          variant={window.innerWidth < 1024 ? "temporary" : "permanent"}
+          variant={isMobile ? "temporary" : "permanent"}
           open={open}
           onClose={handleDrawerToggle}
           sx={{
