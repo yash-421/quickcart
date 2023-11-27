@@ -31,13 +31,13 @@ const steps = [
     description: `For each ad campaign that you create, you can control how much
               you're willing to spend on clicks and conversions, which networks
               and geographical locations you want your ads to show on, and more.`,
-    image: "banner-1.jpg",
+    image: "/banner-1.jpg",
   },
   {
     label: "Create an ad group",
     description:
       "An ad group contains one or more ads which target a shared set of keywords.",
-    image: "banner-2.jpg",
+    image: "/banner-2.jpg",
   },
   {
     label: "Create an ad",
@@ -45,7 +45,7 @@ const steps = [
               and learn how to enhance your ads using features like ad extensions.
               If you run into any problems with your ads, find out how to tell if
               they're running and how to resolve approval issues.`,
-    image: "banner-3.jpg",
+    image: "/banner-3.jpg",
   },
 ];
 const colorClasses = [
