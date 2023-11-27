@@ -42,6 +42,7 @@ import { deepOrange } from "@mui/material/colors";
 import { FaAngleDoubleRight, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaMapLocation, FaSquareXTwitter } from "react-icons/fa6";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 const Layout = ({
   children,
   title,
@@ -53,10 +54,15 @@ const Layout = ({
   const [scrollClass, setScrollClass] = useState(
     "w-[95%] right-[50%] left-[50%] -translate-x-[50%] mt-2 rounded-xl fixed"
   );
+  const router = useRouter();
   const gridItems: { icon: string; title: string; description: string }[] =
     useSelector((state: RootState) => state.gridItems.value);
 
-    const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const navigateTo=(path:string)=>{
+    setSidebar(false)
+    router.push(path)
+  }
 
   const handleClick = () => {
     setOpen(!open);
@@ -154,6 +160,7 @@ const Layout = ({
                 color: "inherit",
                 textDecoration: "none",
               }}
+              onClick={()=>navigateTo('/')}
             >
               LOGO
             </Typography>
@@ -186,6 +193,7 @@ const Layout = ({
                   <Avatar
                     sx={{ bgcolor: deepOrange[500] }}
                     className=" p-5 w-10 h-10"
+                    onClick={()=>navigateTo('myprofile')}
                   >
                     Y
                   </Avatar>
@@ -212,54 +220,39 @@ const Layout = ({
                     aria-labelledby="nested-list-subheader"
                   >
                     <ListItemButton onClick={handleClick}>
-                
-                    <ListItemText primary="Category" />
+                      <ListItemText primary="Category" />
                       {open ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
-                    
+                        <ListItemButton sx={{ pl: 4 }} onClick={()=>navigateTo('products')} >
                           <ListItemText primary="All" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }}>
-                    
+                        <ListItemButton sx={{ pl: 4 }} onClick={()=>navigateTo('products')} >
                           <ListItemText primary="Dairy" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }}>
-                    
+                        <ListItemButton sx={{ pl: 4 }} onClick={()=>navigateTo('products')} >
                           <ListItemText primary="Cold Drinks" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }}>
-                    
+                        <ListItemButton sx={{ pl: 4 }} onClick={()=>navigateTo('products')} >
                           <ListItemText primary="Snack" />
                         </ListItemButton>
                       </List>
                     </Collapse>
-                    <ListItemButton>
-                      <ListItemText>
-                        Contact Us
-                      </ListItemText>
+                    <ListItemButton onClick={()=>navigateTo('contactus')} >
+                      <ListItemText>Contact Us</ListItemText>
+                    </ListItemButton >
+                    <ListItemButton onClick={()=>navigateTo('aboutus')}>
+                      <ListItemText>About Us</ListItemText>
                     </ListItemButton>
-                    <ListItemButton>
-                      <ListItemText>
-                        About Us
-                      </ListItemText>
+                    <ListItemButton onClick={()=>navigateTo('refundpolicy')}>
+                      <ListItemText>Refund Policy</ListItemText>
                     </ListItemButton>
-                    <ListItemButton>
-                      <ListItemText>
-                        Refund Policy
-                      </ListItemText>
+                    <ListItemButton onClick={()=>navigateTo('privacypolicy')}>
+                      <ListItemText>Privacy Policy</ListItemText>
                     </ListItemButton>
-                    <ListItemButton>
-                      <ListItemText>
-                        Privacy Policy
-                      </ListItemText>
-                    </ListItemButton>
-                    <ListItemButton>
-                      <ListItemText>
-                        Term & Condition
-                      </ListItemText>
+                    <ListItemButton onClick={()=>navigateTo('termandconditions')}>
+                      <ListItemText>Term & Condition</ListItemText>
                     </ListItemButton>
                   </List>
                   <Divider />
@@ -283,6 +276,7 @@ const Layout = ({
                 color: "inherit",
                 textDecoration: "none",
               }}
+              onClick={()=>navigateTo('/')}
             >
               LOGO
             </Typography>
@@ -297,7 +291,7 @@ const Layout = ({
               >
                 Category <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('products')}}>
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="All"
@@ -308,7 +302,7 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('products')}}>
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Dairy"
@@ -319,7 +313,7 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('products')}}>
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Cold Drinks"
@@ -330,7 +324,7 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('products')}}>
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Snack"
@@ -346,12 +340,14 @@ const Layout = ({
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 className="mx-5 relative group flex"
+                onClick={()=>{navigateTo('contactus')}}
               >
                 Contact
               </Button>
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 className="mx-5 relative group flex"
+                onClick={()=>{navigateTo('aboutus')}}
               >
                 About Us
               </Button>
@@ -361,7 +357,7 @@ const Layout = ({
               >
                 Help <IoMdArrowDropdown />
                 <List className="absolute hidden group-hover:block bg-white font-semibold shadow-2xl   w-40 top-[100%] rounded-lg border-t-2 border-secondary right-1/2 left-1/2 -translate-x-1/2 px-2 ">
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('refundpolicy')}}>
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Refund Policy"
@@ -372,7 +368,7 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('privacypolicy')}} >
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Privacy Policy"
@@ -383,7 +379,7 @@ const Layout = ({
                       />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600">
+                  <ListItem className="hover:bg-dark p-0 m-0 hover:text-color_9 text-gray-600" onClick={()=>{navigateTo('termandconditions')}}>
                     <ListItemButton className="m-0 py-1 ">
                       <ListItemText
                         primary="Term & Condition"
@@ -407,10 +403,10 @@ const Layout = ({
                 />
               </Search>
 
-              <Button variant="text" className="text-white self-center">
+              <Button variant="text" className="text-white self-center" onClick={()=>navigateTo('signin')} >
                 Login
               </Button>
-              <Avatar className="bg-secondary self-center">N</Avatar>
+              <Avatar className="bg-secondary self-center" onClick={()=>navigateTo('myprofile')} >N</Avatar>
             </Box>
           </Toolbar>
         </Container>

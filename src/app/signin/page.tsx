@@ -59,11 +59,11 @@ const Login = () => {
     <Layout title="Sign In">
       <Grid
         container
-        className="px-20 h-[500px] w-full object-contain rounded-xl bg-cover my-5 "
+        className="px-20 md:h-full min-h-[500px] w-full object-contain rounded-xl bg-cover my-5 "
       >
         <Grid
           item
-          xs={6}
+          xs={12} md={6}
           className="bg-[url('/login.jpg')] bg-center bg-cover rounded-tl-xl rounded-bl-xl flex justify-center flex-col p-10 items-center "
         >
           <Typography
@@ -88,13 +88,13 @@ const Login = () => {
             }}
             className="mt-5 text-gray-500"
           >
-            Already have an account?{" "}
+            Don't have account?{" "}
             <Link href={"/signup"} className="text-dark">
-              Login
+              Signup
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={6} className="">
+        <Grid item xs={12} md={6} className="">
           <Formik
             initialValues={credentials}
             onSubmit={login}

@@ -86,7 +86,7 @@ const SignUp = () => {
       >
         <Grid
           item
-          xs={6}
+          xs={12} md={6}
           className="bg-[url('/login.jpg')] bg-center bg-cover rounded-tl-xl rounded-bl-xl flex justify-center flex-col p-10 items-center "
         >
           <Typography
@@ -115,7 +115,7 @@ const SignUp = () => {
             Already have an account? <Link href={"/signin"} className="text-dark" >Login</Link>
           </Typography>
         </Grid>
-        <Grid item xs={6} className="h-full ">
+        <Grid item xs={12} md={6} className="h-full ">
           <Formik
             initialValues={credentials}
             onSubmit={signUp}

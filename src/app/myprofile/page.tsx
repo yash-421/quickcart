@@ -62,7 +62,7 @@ const UserProfilePage = () => {
             My Profile
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6} >
           <Box
             sx={{ color: "text.secondary" }}
             className="flex flex-col items-center justify-center h-full"
@@ -82,7 +82,7 @@ const UserProfilePage = () => {
             </Typography>
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6} >
           <Card className="rounded-2xl hover:shadow-xl shadow-none border-[1px] border-gray-300 relative p-5">
             <CardContent className="flex justify-center ">
               <Formik
